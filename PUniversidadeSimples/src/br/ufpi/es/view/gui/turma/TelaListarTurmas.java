@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.turma;
+package br.ufpi.es.view.gui.turma;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.turma;
+package br.ufpi.es.view.gui.turma;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,12 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import br.ufpi.es.controller.Fachada;
-import br.ufpi.es.gui.aluno.TelaAlterarAluno;
-import br.ufpi.es.gui.aluno.TelaBuscarAluno;
-import br.ufpi.es.gui.aluno.TelaInserirAluno;
-import br.ufpi.es.gui.aluno.TelaListarAlunos;
-import br.ufpi.es.gui.aluno.TelaQtdAlunos;
-import br.ufpi.es.gui.aluno.TelaRemoverAluno;
+import br.ufpi.es.view.gui.aluno.TelaAlterarAluno;
+import br.ufpi.es.view.gui.aluno.TelaBuscarAluno;
+import br.ufpi.es.view.gui.aluno.TelaInserirAluno;
+import br.ufpi.es.view.gui.aluno.TelaListarAlunos;
+import br.ufpi.es.view.gui.aluno.TelaQtdAlunos;
+import br.ufpi.es.view.gui.aluno.TelaRemoverAluno;
 
 public class TelaMenuTurma extends JDialog {
 

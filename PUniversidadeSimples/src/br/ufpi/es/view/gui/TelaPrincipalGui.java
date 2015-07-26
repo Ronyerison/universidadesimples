@@ -1,4 +1,4 @@
-package br.ufpi.es.gui;
+package br.ufpi.es.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,9 +20,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import br.ufpi.es.controller.Fachada;
-import br.ufpi.es.gui.aluno.TelaMenuAluno;
-import br.ufpi.es.gui.professor.TelaMenuProfessor;
-import br.ufpi.es.gui.turma.TelaMenuTurma;
+import br.ufpi.es.view.gui.aluno.TelaMenuAluno;
+import br.ufpi.es.view.gui.professor.TelaMenuProfessor;
+import br.ufpi.es.view.gui.turma.TelaMenuTurma;
 
 /**
  * Classe que monta a TelaPrincipal da aplicacao GUI

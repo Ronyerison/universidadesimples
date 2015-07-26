@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.turma;
+package br.ufpi.es.view.gui.aluno;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 
 import br.ufpi.es.controller.Fachada;
 
-public class TelaQtdTurma extends JDialog {
-	
+public class TelaQtdAlunos extends JDialog {
+
 	private static final long serialVersionUID = 1L;
 
 	private Fachada fachada;
@@ -26,9 +26,9 @@ public class TelaQtdTurma extends JDialog {
 
 	private JLabel labelQtd;
 
-	public TelaQtdTurma(Fachada f) {
+	public TelaQtdAlunos(Fachada f) {
 		// Configurações do dialog
-		setTitle("Quantidade de Turmas");
+		setTitle("Quantidade de Alunos");
 		setModal(true);
 		setSize(500, 125);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -42,7 +42,7 @@ public class TelaQtdTurma extends JDialog {
 		// Insere os componentes no dialog
 		painelSuperior = new JPanel();
 		painelSuperior.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-		labelTitulo = new JLabel("Quantidade de Turmas");
+		labelTitulo = new JLabel("Quantidade de Alunos");
 		labelTitulo.setFont(new Font("sans-serif", Font.BOLD, 16));
 		labelTitulo.setForeground(Color.BLUE);
 		painelSuperior.add(labelTitulo);
@@ -50,9 +50,9 @@ public class TelaQtdTurma extends JDialog {
 		painelForm = new JPanel();
 		
 		try {
-			int qtd = fachada.quantidadeTurma(); // conculta a quantidade de
+			int qtd = fachada.quantidadeAlunos(); // conculta a quantidade de
 													// alunos
-			labelQtd = new JLabel("Quantidade de turmas: " + qtd);
+			labelQtd = new JLabel("Quantidade de alunos: " + qtd);
 			labelQtd.setFont(new Font("sans-serif", Font.BOLD, 12));
 			painelForm.add(labelQtd);
 		} catch (Exception e) {
@@ -65,5 +65,5 @@ public class TelaQtdTurma extends JDialog {
 		
 		setVisible(true);
 	}
-	
+
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.ufpi.es.view;
+package br.ufpi.es.view.console;
 
 import java.util.List;
 import java.util.Scanner;

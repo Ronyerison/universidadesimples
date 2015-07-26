@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.turma;
+package br.ufpi.es.view.gui.turma;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,9 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import br.ufpi.es.controller.Fachada;
+import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.TurmaNaoExistenteException;
 
-public class TelaRemoverTurma extends JDialog {
+public class TelaBuscarTurma extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -32,19 +33,23 @@ public class TelaRemoverTurma extends JDialog {
 	
 	// Labels dos campos
 	private JPanel painelEsquerda;
-	private JLabel labelDisciplinaRemover;
+	private JLabel labelDisciplinaBusca;
+	private JLabel labelDepartamento;
+	private JLabel labelCargaHoraria;
 	
 	// Campos de texto
 	private JPanel painelDireita;
-	private JPanel painelRemover;
-	private JTextField txtDisciplinaRemover;
-	private JButton buttonRemover;
-		
-	public TelaRemoverTurma(Fachada f) {
+	private JPanel painelBusca;
+	private JTextField txtDisciplinaBusca;
+	private JButton buttonBuscar;
+	private JTextField txtDepartamento;
+	private JTextField txtCargaHoraria;
+	
+	public TelaBuscarTurma(Fachada f) {
 		// Configurações do dialog
-		setTitle("Remover Turma");
+		setTitle("Buscar Turma");
 		setModal(true);
-		setSize(500, 125);
+		setSize(500, 225);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -56,7 +61,7 @@ public class TelaRemoverTurma extends JDialog {
 		// Insere os componentes no dialog
 		painelSuperior = new JPanel();
 		painelSuperior.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-		labelTitulo = new JLabel("Remover Turma");
+		labelTitulo = new JLabel("Buscar Turma");
 		labelTitulo.setFont(new Font("sans-serif", Font.BOLD, 16));
 		labelTitulo.setForeground(Color.BLUE);
 		painelSuperior.add(labelTitulo);
@@ -64,24 +69,32 @@ public class TelaRemoverTurma extends JDialog {
 		painelForm = new JPanel(new BorderLayout(10, 10));
 		painelForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		painelEsquerda = new JPanel(new GridLayout(1, 1, 10, 10));
-		labelDisciplinaRemover = new JLabel("Informe o nome da disciplina:");
-		labelDisciplinaRemover.setFont(new Font("sans-serif", Font.BOLD, 12));
-		painelEsquerda.add(labelDisciplinaRemover);
+		painelEsquerda = new JPanel(new GridLayout(4, 1, 10, 10));
+		labelDisciplinaBusca = new JLabel("Informe a disciplina:");
+		labelDisciplinaBusca.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelDepartamento = new JLabel("Departamento:");
+		labelDepartamento.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelCargaHoraria = new JLabel("Carga horaria:");
+		labelCargaHoraria.setFont(new Font("sans-serif", Font.BOLD, 12));
+		painelEsquerda.add(labelDisciplinaBusca);
+		painelEsquerda.add(labelDepartamento);
+		painelEsquerda.add(labelCargaHoraria);
 		
-		painelDireita = new JPanel(new GridLayout(1, 1, 10, 10));
-		painelRemover = new JPanel(new BorderLayout(10, 0));
-		txtDisciplinaRemover = new JTextField();
-		buttonRemover = new JButton("Remover");
-		buttonRemover.setFont(new Font("sans-serif", Font.BOLD, 13));
-		// Adiciona o listener do botão "Remover"
-		buttonRemover.addActionListener(new ActionListener() {
+		painelDireita = new JPanel(new GridLayout(4, 1, 10, 10));
+		painelBusca = new JPanel(new BorderLayout(10, 0));
+		txtDisciplinaBusca = new JTextField();
+		buttonBuscar = new JButton("Buscar");
+		buttonBuscar.setFont(new Font("sans-serif", Font.BOLD, 13));
+		// Adiciona o listener ao botão "Buscar"
+		buttonBuscar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String disciplina = txtDisciplinaRemover.getText();
-				if (disciplina.trim().length() != 0) {
+				String matricula = txtDisciplinaBusca.getText();
+				if (matricula.compareTo("") != 0) { // verifica se o usuário preencheu a matrícula
 					try {
-						fachada.removerTurma(disciplina);
+						Turma turma = fachada.buscarTurma(matricula);
+						txtDepartamento.setText(turma.getDepartamento());
+						txtCargaHoraria.setText(String.valueOf(turma.getCargaHoraria()));
 					} catch (TurmaNaoExistenteException e1) {
 						JOptionPane.showMessageDialog(
 								null,
@@ -98,17 +111,20 @@ public class TelaRemoverTurma extends JDialog {
 				} else {
 					JOptionPane.showMessageDialog(
 							null,
-							"Você deve informar o nome da disciplina.",
+							"Você deve informar a matrícula do aluno.",
 							"Campo obrigatório",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		
-		painelRemover.add(txtDisciplinaRemover, BorderLayout.CENTER);
-		painelRemover.add(buttonRemover, BorderLayout.EAST);
-		
-		painelDireita.add(painelRemover);
+		painelBusca.add(txtDisciplinaBusca, BorderLayout.CENTER);
+		painelBusca.add(buttonBuscar, BorderLayout.EAST);
+		txtDepartamento = new JTextField();
+		txtCargaHoraria = new JTextField();
+		painelDireita.add(painelBusca);
+		painelDireita.add(txtDepartamento);
+		painelDireita.add(txtCargaHoraria);
 		
 		painelForm.add(painelEsquerda, BorderLayout.WEST);
 		painelForm.add(painelDireita, BorderLayout.CENTER);
@@ -118,5 +134,4 @@ public class TelaRemoverTurma extends JDialog {
 		
 		setVisible(true);
 	}
-	
 }

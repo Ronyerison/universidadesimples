@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.aluno;
+package br.ufpi.es.view.gui.turma;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,15 +17,11 @@ import javax.swing.JTextField;
 
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
-import br.ufpi.es.system.exception.AlunoNaoExistenteException;
+import br.ufpi.es.model.Turma;
+import br.ufpi.es.system.exception.TurmaNaoExistenteException;
 
-/**
- * Classe que monta a Tala Alterar Aluno
- * @author armandosoaressousa
- *
- */
-public class TelaAlterarAluno extends JDialog {
-
+public class TelaAlterarTurma extends JDialog {
+	
 	private static final long serialVersionUID = 1L;
 
 	private Fachada fachada;
@@ -38,33 +34,28 @@ public class TelaAlterarAluno extends JDialog {
 
 	// Labels dos campos
 	private JPanel painelEsquerda;
-	private JLabel labelMatriculaBusca;
-	private JLabel labelNome;
-	private JLabel labelMatricula;
-	private JLabel labelCurso;
+	private JLabel labelDisciplinaBusca;
+	private JLabel labelDepartamento;
+	private JLabel labelDisciplina;
+	private JLabel labelCargaHoraria;
 
 	// Campos de texto
 	private JPanel painelDireita;
 	private JPanel painelBusca;
-	private JTextField txtMatriculaBusca;
+	private JTextField txtDisciplinaBusca;
 	private JButton buttonBuscar;
-	private JTextField txtNome;
-	private JTextField txtMatricula;
-	private JTextField txtCurso;
+	private JTextField txtDepartamento;
+	private JTextField txtDisciplina;
+	private JTextField txtCargaHoraria;
 
 	// Botões
 	private JPanel painelInferior;
 	private JButton botaoLimpar;
 	private JButton botaoAlterar;
 
-	/**
-	 * Monta a tela alterar aluno
-	 * - Dado um aluno existente, busca no repositorio, passa os dados alterados
-	 * @param f fachada
-	 */
-	public TelaAlterarAluno(Fachada f) {
+	public TelaAlterarTurma(Fachada f) {
 		// Configurações do dialog
-		setTitle("Alterar Aluno");
+		setTitle("Alterar Turma");
 		setModal(true);
 		setSize(500, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -78,7 +69,7 @@ public class TelaAlterarAluno extends JDialog {
 		// Insere os componentes no dialog
 		painelSuperior = new JPanel();
 		painelSuperior.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-		labelTitulo = new JLabel("Alterar Aluno");
+		labelTitulo = new JLabel("Alterar Turma");
 		labelTitulo.setFont(new Font("sans-serif", Font.BOLD, 16));
 		labelTitulo.setForeground(Color.BLUE);
 		painelSuperior.add(labelTitulo);
@@ -87,39 +78,39 @@ public class TelaAlterarAluno extends JDialog {
 		painelForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		painelEsquerda = new JPanel(new GridLayout(4, 1, 10, 10));
-		labelMatriculaBusca = new JLabel("Informe a matrícula do aluno:");
-		labelMatriculaBusca.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelNome = new JLabel("Nome:");
-		labelNome.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelMatricula = new JLabel("Matrícula:");
-		labelMatricula.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelCurso = new JLabel("Curso:");
-		labelCurso.setFont(new Font("sans-serif", Font.BOLD, 12));
-		painelEsquerda.add(labelMatriculaBusca);
-		painelEsquerda.add(labelNome);
-		painelEsquerda.add(labelMatricula);
-		painelEsquerda.add(labelCurso);
+		labelDisciplinaBusca = new JLabel("Informe o nome da disciplina:");
+		labelDisciplinaBusca.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelDepartamento = new JLabel("Departamento:");
+		labelDepartamento.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelDisciplina = new JLabel("Disciplina:");
+		labelDisciplina.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelCargaHoraria = new JLabel("Carga Horária:");
+		labelCargaHoraria.setFont(new Font("sans-serif", Font.BOLD, 12));
+		painelEsquerda.add(labelDisciplinaBusca);
+		painelEsquerda.add(labelDepartamento);
+		painelEsquerda.add(labelDisciplina);
+		painelEsquerda.add(labelCargaHoraria);
 
 		painelDireita = new JPanel(new GridLayout(4, 1, 10, 10));
 		painelBusca = new JPanel(new BorderLayout(10, 0));
-		txtMatriculaBusca = new JTextField();
+		txtDisciplinaBusca = new JTextField();
 		buttonBuscar = new JButton("Buscar");
 		buttonBuscar.setFont(new Font("sans-serif", Font.BOLD, 13));
 		// Adiciona o listener ao botão "Buscar"
 		buttonBuscar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String matricula = txtMatriculaBusca.getText();
-				if (matricula.compareTo("") != 0) { // verifica se o usuário
+				String disciplina = txtDisciplinaBusca.getText();
+				if (disciplina.compareTo("") != 0) { // verifica se o usuário
 													// preencheu a matrícula
 					try {
-						Aluno aluno = fachada.buscarAluno(matricula);
-						txtNome.setText(aluno.getNome());
-						txtMatricula.setText(aluno.getMatricula());
-						txtCurso.setText(aluno.getCurso());
-					} catch (AlunoNaoExistenteException e1) {
+						Turma turma = fachada.buscarTurma(disciplina);
+						txtDepartamento.setText(turma.getDepartamento());
+						txtDisciplina.setText(turma.getDisciplina());
+						txtCargaHoraria.setText(String.valueOf(turma.getCargaHoraria()));
+					} catch (TurmaNaoExistenteException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage()
-								+ ".", "Aluno Não Existente",
+								+ ".", "Turma Não Existente",
 								JOptionPane.INFORMATION_MESSAGE);
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(),
@@ -127,21 +118,21 @@ public class TelaAlterarAluno extends JDialog {
 					}
 				} else {
 					JOptionPane.showMessageDialog(null,
-							"Você deve informar a matrícula do aluno.",
+							"Você deve informar o nome da disciplina.",
 							"Campo obrigatório", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 
-		painelBusca.add(txtMatriculaBusca, BorderLayout.CENTER);
+		painelBusca.add(txtDisciplinaBusca, BorderLayout.CENTER);
 		painelBusca.add(buttonBuscar, BorderLayout.EAST);
-		txtNome = new JTextField();
-		txtMatricula = new JTextField();
-		txtCurso = new JTextField();
+		txtDepartamento = new JTextField();
+		txtDisciplina = new JTextField();
+		txtCargaHoraria = new JTextField();
 		painelDireita.add(painelBusca);
-		painelDireita.add(txtNome);
-		painelDireita.add(txtMatricula);
-		painelDireita.add(txtCurso);
+		painelDireita.add(txtDepartamento);
+		painelDireita.add(txtDisciplina);
+		painelDireita.add(txtCargaHoraria);
 
 		painelForm.add(painelEsquerda, BorderLayout.WEST);
 		painelForm.add(painelDireita, BorderLayout.CENTER);
@@ -155,40 +146,34 @@ public class TelaAlterarAluno extends JDialog {
 		botaoLimpar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				txtNome.setText("");
-				txtMatricula.setText("");
-				txtCurso.setText("");
+				txtDepartamento.setText("");
+				txtDisciplina.setText("");
+				txtCargaHoraria.setText("");
 			}
 		});
 
 		botaoAlterar = new JButton("Alterar");
 		botaoAlterar.setFont(new Font("sans-serif", Font.BOLD, 13));
 
-		// Adiciona listener do botão "Alterar"
+		// Adiciona listener do botão "Inserir"
 		botaoAlterar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Aluno alunoAux = new Aluno("","","");
 				if (isDadosValidos()) {
-					String matricula = txtMatriculaBusca.getText();
+					Aluno aluno = new Aluno(txtDisciplina.getText(), txtDepartamento
+							.getText(), txtCargaHoraria.getText());
 					try {
-						alunoAux = fachada.buscarAluno(matricula);
-					} catch (AlunoNaoExistenteException e2) {
-						JOptionPane.showMessageDialog(null,"Aluno nao existe",e2.getMessage(),JOptionPane.INFORMATION_MESSAGE);
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null,"Erro ao buscar aluno",e2.getMessage(),JOptionPane.INFORMATION_MESSAGE);
-					}
-					Aluno a2 = new Aluno(txtMatricula.getText(), txtNome.getText(),txtCurso.getText());
-					a2.setIdAluno(alunoAux.getIdAluno());
-					try {
-						fachada.alterarAluno(a2);
-						JOptionPane.showMessageDialog(null,"Aluno alterado com sucesso.","Aluno Alterado",JOptionPane.INFORMATION_MESSAGE);
-						txtMatriculaBusca.setText("");
-						txtMatricula.setText("");
-						txtNome.setText("");
-						txtCurso.setText("");
+						fachada.alterarAluno(aluno);
+
+						JOptionPane.showMessageDialog(null,
+								"Aluno alterado com sucesso.",
+								"Aluno Alterado",
+								JOptionPane.INFORMATION_MESSAGE);
+
 					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null,"Não foi possível alterar o aluno.", "Erro",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,
+								"Não foi possível alterar o aluno.", "Erro",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -203,22 +188,21 @@ public class TelaAlterarAluno extends JDialog {
 				boolean dadosValidos = true;
 				String erro = "Os seguintes campos apresentam erros:\n";
 
-				if (txtNome.getText().equals("")) {
+				if (txtDepartamento.getText().trim().length() == 0) {
 					erro += "- Nome.\n";
 					dadosValidos = false;
 				}
-				if (txtMatricula.getText().equals("")) {
+				if (txtDisciplina.getText().trim().length() == 0) {
 					erro += "- Matrícula.\n";
 					dadosValidos = false;
 				}
-				if (txtCurso.getText().equals("")) {
+				if (txtCargaHoraria.getText().trim().length() == 0) {
 					erro += "- Curso.\n";
 					dadosValidos = false;
 				}
 
-				if (!dadosValidos){
-					JOptionPane.showMessageDialog(null, erro, "Dados Inválidos", JOptionPane.ERROR_MESSAGE);
-				}
+				JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
+						JOptionPane.ERROR_MESSAGE);
 
 				return dadosValidos;
 			}
@@ -233,5 +217,4 @@ public class TelaAlterarAluno extends JDialog {
 
 		setVisible(true);
 	}
-
 }

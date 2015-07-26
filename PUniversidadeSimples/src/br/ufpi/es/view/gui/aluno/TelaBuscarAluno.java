@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.aluno;
+package br.ufpi.es.view.gui.aluno;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

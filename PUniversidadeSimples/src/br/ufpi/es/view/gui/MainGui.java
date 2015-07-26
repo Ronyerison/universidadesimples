@@ -1,4 +1,4 @@
-package br.ufpi.es.gui;
+package br.ufpi.es.view.gui;
 
 import javax.swing.JFrame;
 

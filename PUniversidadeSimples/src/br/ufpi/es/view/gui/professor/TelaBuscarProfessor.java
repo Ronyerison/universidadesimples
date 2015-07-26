@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.professor;
+package br.ufpi.es.view.gui.professor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,11 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import br.ufpi.es.controller.Fachada;
-import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Professor;
+import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
 
-public class TelaAlterarProfessor extends JDialog {
+public class TelaBuscarProfessor extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class TelaAlterarProfessor extends JDialog {
 	// Labels dos campos
 	private JPanel painelEsquerda;
 	private JLabel labelCpfBusca;
-	private JLabel labelCpf;
+	private JLabel labelCPF;
 	private JLabel labelNome;
 	private JLabel labelLotacao;
 	private JLabel labelTitulo;
@@ -50,28 +50,23 @@ public class TelaAlterarProfessor extends JDialog {
 	private JTextField txtLotacao;
 	private JTextField txtTitulo;
 
-	// Botões
-	private JPanel painelInferior;
-	private JButton botaoLimpar;
-	private JButton botaoAlterar;
-
-	public TelaAlterarProfessor(Fachada f) {
+	public TelaBuscarProfessor(Fachada f) {
 		// Configurações do dialog
-		setTitle("Alterar Professor");
+		setTitle("Buscar Professor");
 		setModal(true);
-		setSize(500, 325);
+		setSize(500, 290);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
 
 		setLayout(new BorderLayout()); // Altera gerenciador de layout padrão
-
+		
 		fachada = f;
-
+		
 		// Insere os componentes no dialog
 		painelSuperior = new JPanel();
 		painelSuperior.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-		labelTituloTela = new JLabel("Alterar Professor");
+		labelTituloTela = new JLabel("Buscar Professor");
 		labelTituloTela.setFont(new Font("sans-serif", Font.BOLD, 16));
 		labelTituloTela.setForeground(Color.BLUE);
 		painelSuperior.add(labelTituloTela);
@@ -80,18 +75,18 @@ public class TelaAlterarProfessor extends JDialog {
 		painelForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		painelEsquerda = new JPanel(new GridLayout(5, 1, 10, 10));
-		labelCpfBusca = new JLabel("Informe o CPF do professor:");
+		labelCpfBusca = new JLabel("Informe CPF do Professor:");
 		labelCpfBusca.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelCpf = new JLabel("CPF:");
-		labelCpf.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelCPF = new JLabel("CPF:");
+		labelCPF.setFont(new Font("sans-serif", Font.BOLD, 12));
 		labelNome = new JLabel("Nome:");
 		labelNome.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelLotacao = new JLabel("Lotação:");
+		labelLotacao = new JLabel("Matrícula:");
 		labelLotacao.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelTitulo = new JLabel("Título:");
+		labelTitulo = new JLabel("Curso:");
 		labelTitulo.setFont(new Font("sans-serif", Font.BOLD, 12));
 		painelEsquerda.add(labelCpfBusca);
-		painelEsquerda.add(labelCpf);
+		painelEsquerda.add(labelCPF);
 		painelEsquerda.add(labelNome);
 		painelEsquerda.add(labelLotacao);
 		painelEsquerda.add(labelTitulo);
@@ -106,7 +101,7 @@ public class TelaAlterarProfessor extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String cpf = txtCpfBusca.getText();
-				if (cpf.trim().length() != 0) { // verifica se o usuário
+				if (cpf.compareTo("") != 0) { // verifica se o usuário
 													// preencheu a matrícula
 					try {
 						Professor professor = fachada.buscarProfessor(cpf);
@@ -145,86 +140,9 @@ public class TelaAlterarProfessor extends JDialog {
 		painelForm.add(painelEsquerda, BorderLayout.WEST);
 		painelForm.add(painelDireita, BorderLayout.CENTER);
 
-		painelInferior = new JPanel();
-		painelInferior.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-		botaoLimpar = new JButton("Limpar");
-		botaoLimpar.setFont(new Font("sans-serif", Font.BOLD, 13));
-
-		// Adiciona listener do botão "limpar"
-		botaoLimpar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				txtCpf.setText("");
-				txtNome.setText("");
-				txtLotacao.setText("");
-				txtTitulo.setText("");
-			}
-		});
-
-		botaoAlterar = new JButton("Alterar");
-		botaoAlterar.setFont(new Font("sans-serif", Font.BOLD, 13));
-
-		// Adiciona listener do botão "Inserir"
-		botaoAlterar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (isDadosValidos()) {
-					Aluno aluno = new Aluno(txtLotacao.getText(), txtNome
-							.getText(), txtTitulo.getText());
-					try {
-						fachada.alterarAluno(aluno);
-
-						JOptionPane.showMessageDialog(null,
-								"Professor alterado com sucesso.",
-								"Professor Alterado",
-								JOptionPane.INFORMATION_MESSAGE);
-
-					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null,
-								"Não foi possível alterar o professor.", "Erro",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				}
-			}
-
-			/**
-			 * Valida o formulário
-			 * 
-			 * @return true se os dados do formulário forem válidos. false caso
-			 *         contrário.
-			 */
-			public boolean isDadosValidos() {
-				boolean dadosValidos = true;
-				String erro = "Os seguintes campos apresentam erros:\n";
-
-				if (txtNome.getText().trim().length() == 0) {
-					erro += "- Nome.\n";
-					dadosValidos = false;
-				}
-				if (txtLotacao.getText().trim().length() == 0) {
-					erro += "- Matrícula.\n";
-					dadosValidos = false;
-				}
-				if (txtTitulo.getText().trim().length() == 0) {
-					erro += "- Curso.\n";
-					dadosValidos = false;
-				}
-
-				JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
-						JOptionPane.ERROR_MESSAGE);
-
-				return dadosValidos;
-			}
-		});
-
-		painelInferior.add(botaoLimpar);
-		painelInferior.add(botaoAlterar);
-
 		add(painelSuperior, BorderLayout.NORTH);
 		add(painelForm, BorderLayout.CENTER);
-		add(painelInferior, BorderLayout.SOUTH);
 
 		setVisible(true);
 	}
-
 }

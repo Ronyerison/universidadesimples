@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.turma;
+package br.ufpi.es.view.gui.aluno;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,166 +17,173 @@ import javax.swing.JTextField;
 
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
-import br.ufpi.es.model.Turma;
+import br.ufpi.es.model.Professor;
 
-public class TelaInserirTurma extends JDialog {
-
+/**
+ * Classe que monta a Tela Inserir Aluno
+ * @author Neto Araújo
+ *
+ */
+public class TelaInserirAluno extends JDialog { 
 	private static final long serialVersionUID = 1L;
-
+	
 	private Fachada fachada;
-
+	
 	// Título do menu
 	private JPanel painelSuperior;
 	private JLabel labelTitulo;
-
+	
 	private JPanel painelForm;
-
+	
 	// Labels dos campos
 	private JPanel painelEsquerda;
-	private JLabel labelDepartamento;
-	private JLabel labelDisciplina;
-	private JLabel labelCargaHoraria;
-
+	private JLabel labelNome;
+	private JLabel labelMatricula;
+	private JLabel labelCurso;
+	
 	// Campos de texto
 	private JPanel painelDireita;
-	private JTextField txtDepartamento;
-	private JTextField txtDisciplina;
-	private JTextField txtCargaHoraria;
-
+	private JTextField txtNome;
+	private JTextField txtMatricula;
+	private JTextField txtCurso;
+	
 	// Botões
 	private JPanel painelInferior;
 	private JButton botaoLimpar;
 	private JButton botaoInserir;
-
-	public TelaInserirTurma(Fachada f) {
+	
+	/**
+	 * Monta a Tela inserir aluno
+	 * @param f fachada unica do sistema
+	 */
+	public TelaInserirAluno(Fachada f) {
 		// Configurações do dialog
-		setTitle("Inserir Turma");
+		setTitle("Inserir Aluno");
 		setModal(true);
 		setSize(500, 250);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-
+		
 		setLayout(new BorderLayout()); // Altera gerenciador de layout padrão
-
+		
 		fachada = f;
-
+		
 		// Insere os componentes no dialog
 		painelSuperior = new JPanel();
 		painelSuperior.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-		labelTitulo = new JLabel("Inserir Turma");
+		labelTitulo = new JLabel("Inserir Aluno");
 		labelTitulo.setFont(new Font("sans-serif", Font.BOLD, 16));
 		labelTitulo.setForeground(Color.BLUE);
 		painelSuperior.add(labelTitulo);
-
+		
 		painelForm = new JPanel(new BorderLayout(10, 10));
 		painelForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+		
 		painelEsquerda = new JPanel(new GridLayout(3, 1, 10, 10));
-		labelDepartamento = new JLabel("Informe o departamento:");
-		labelDepartamento.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelDisciplina = new JLabel("Informe a disciplina:");
-		labelDisciplina.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelCargaHoraria = new JLabel("Informe a carga horária:");
-		labelCargaHoraria.setFont(new Font("sans-serif", Font.BOLD, 12));
-		painelEsquerda.add(labelDepartamento);
-		painelEsquerda.add(labelDisciplina);
-		painelEsquerda.add(labelCargaHoraria);
-
+		labelNome = new JLabel("Informe o nome:");
+		labelNome.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelMatricula = new JLabel("Informe a matrícula:");
+		labelMatricula.setFont(new Font("sans-serif", Font.BOLD, 12));
+		labelCurso = new JLabel("Informe o curso:");
+		labelCurso.setFont(new Font("sans-serif", Font.BOLD, 12));
+		painelEsquerda.add(labelNome);
+		painelEsquerda.add(labelMatricula);
+		painelEsquerda.add(labelCurso);
+		
 		painelDireita = new JPanel(new GridLayout(3, 1, 10, 10));
-		txtDepartamento = new JTextField();
-		txtDisciplina = new JTextField();
-		txtCargaHoraria = new JTextField();
-		painelDireita.add(txtDepartamento);
-		painelDireita.add(txtDisciplina);
-		painelDireita.add(txtCargaHoraria);
-
+		txtNome = new JTextField();
+		txtMatricula = new JTextField();
+		txtCurso = new JTextField();
+		painelDireita.add(txtNome);
+		painelDireita.add(txtMatricula);
+		painelDireita.add(txtCurso);
+		
 		painelInferior = new JPanel();
 		painelInferior.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
 		botaoLimpar = new JButton("Limpar");
 		botaoLimpar.setFont(new Font("sans-serif", Font.BOLD, 13));
-
+		
 		// Adiciona listener do botão "limpar"
 		botaoLimpar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				txtDepartamento.setText("");
-				txtDisciplina.setText("");
-				txtCargaHoraria.setText("");
+				txtNome.setText("");
+				txtMatricula.setText("");
+				txtCurso.setText("");
 			}
 		});
-
+		
 		botaoInserir = new JButton("Inserir");
 		botaoInserir.setFont(new Font("sans-serif", Font.BOLD, 13));
-
+		
 		// Adiciona listener do botão "Inserir"
 		botaoInserir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isDadosValidos()) {
-					Turma turma = new Turma(txtDisciplina.getText(), txtDepartamento
-							.getText(), Integer.parseInt(txtCargaHoraria.getText()));
+					Aluno aluno = new Aluno(txtMatricula.getText(), txtNome.getText(), txtCurso.getText());
 					try {
-						fachada.inserirTurma(turma);
-
-						JOptionPane.showMessageDialog(null,
-								"Turma inserida com sucesso.",
-								"Turma Inserida",
+						fachada.inserirAluno(aluno);
+						
+						JOptionPane.showMessageDialog(
+								null,
+								"Aluno inserido com sucesso.",
+								"Aluno Inserido",
 								JOptionPane.INFORMATION_MESSAGE);
-
-						txtDisciplina.setText("");
-						txtDepartamento.setText("");
-						txtCargaHoraria.setText("");
-
+						
+						txtMatricula .setText("");
+						txtNome.setText("");
+						txtCurso.setText("");
+						
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(),
-								"Turma Não Inserido", JOptionPane.ERROR_MESSAGE);
+								"Aluno Não Inserido",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
-
+			
 			/**
 			 * Valida o formulário
-			 * 
-			 * @return true se os dados do formulário forem válidos. false caso
-			 *         contrário.
+			 * @return true se os dados do formulário forem válidos. false caso contrário.
 			 */
 			public boolean isDadosValidos() {
 				boolean dadosValidos = true;
 				String erro = "Os seguintes campos apresentam erros:\n";
-
-				if (txtDepartamento.getText().trim().length() == 0) {
-					erro += "- Departamento.\n";
+				
+				if (txtNome.getText().trim().length() == 0) {
+					erro += "- Nome.\n";
 					dadosValidos = false;
 				}
-				if (txtDisciplina.getText().trim().length() == 0) {
-					erro += "- Disciplina.\n";
+				if (txtMatricula.getText().trim().length() == 0) {
+					erro += "- Matrícula.\n";
 					dadosValidos = false;
 				}
-				if (txtCargaHoraria.getText().trim().length() == 0) {
-					erro += "- Carga horária.\n";
+				if (txtCurso.getText().trim().length() == 0) {
+					erro += "- Curso.\n";
 					dadosValidos = false;
 				}
-
-				if (!dadosValidos) {
-					JOptionPane.showMessageDialog(null, erro,
-							"Dados Inválidos", JOptionPane.ERROR_MESSAGE);
+				
+				if (!dadosValidos){
+					JOptionPane.showMessageDialog(null, erro, "Dados Inválidos", JOptionPane.ERROR_MESSAGE);
 				}
 				return dadosValidos;
 			}
 		});
-
+		
 		painelInferior.add(botaoLimpar);
 		painelInferior.add(botaoInserir);
-
+		
 		painelForm.add(painelEsquerda, BorderLayout.WEST);
 		painelForm.add(painelDireita, BorderLayout.CENTER);
-
+		
 		add(painelSuperior, BorderLayout.NORTH);
 		add(painelForm, BorderLayout.CENTER);
 		add(painelInferior, BorderLayout.SOUTH);
-
+		
 		setVisible(true); // Exibe o dialog
 	}
 
 }
+			

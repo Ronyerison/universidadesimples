@@ -1,4 +1,4 @@
-package br.ufpi.es.gui.professor;
+package br.ufpi.es.view.gui.professor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
