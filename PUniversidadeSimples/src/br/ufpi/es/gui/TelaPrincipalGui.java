@@ -24,6 +24,11 @@ import br.ufpi.es.gui.aluno.TelaMenuAluno;
 import br.ufpi.es.gui.professor.TelaMenuProfessor;
 import br.ufpi.es.gui.turma.TelaMenuTurma;
 
+/**
+ * Classe que monta a TelaPrincipal da aplicacao GUI
+ * @author armandosoaressousa
+ *
+ */
 public class TelaPrincipalGui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +52,9 @@ public class TelaPrincipalGui extends JFrame {
 	
 	private Fachada fachada;
 	
+	/**
+	 * Metodo que monta a tela principal da aplicacao
+	 */
 	public TelaPrincipalGui() {
 		super("Universidade Simples");
 		
@@ -143,7 +151,8 @@ public class TelaPrincipalGui extends JFrame {
 				mensagem += "Saulo de Tarso\n";
 				mensagem += "Roney Lira\n";
 				mensagem += "Alan Melão\n";
-				mensagem += "Joselito Junior";
+				mensagem += "Joselito Junior\n";
+				mensagem += "Versao: 1.0.0 - 2015 - Julho - UFPI";
 				
 				JOptionPane.showMessageDialog(null, mensagem, "Sobre", JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -155,6 +164,9 @@ public class TelaPrincipalGui extends JFrame {
 		add(painelInferior, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Gerenciador de Layout da aplicacao GUI
+	 */
 	private void configuraNimbus() {
 		for (UIManager.LookAndFeelInfo look : UIManager
 				.getInstalledLookAndFeels()) {

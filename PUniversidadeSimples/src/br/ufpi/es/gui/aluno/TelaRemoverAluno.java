@@ -18,6 +18,11 @@ import javax.swing.JTextField;
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 
+/**
+ * Classe que cria a Tela Remover Aluno
+ * @author armandosoaressousa
+ *
+ */
 public class TelaRemoverAluno extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -40,6 +45,10 @@ public class TelaRemoverAluno extends JDialog {
 	private JTextField txtMatriculaRemover;
 	private JButton buttonRemover;
 		
+	/**
+	 * Monta a tela remover aluno
+	 * @param f fachada
+	 */
 	public TelaRemoverAluno(Fachada f) {
 		// Configurações do dialog
 		setTitle("Remover Aluno");
@@ -82,6 +91,8 @@ public class TelaRemoverAluno extends JDialog {
 				if (matricula.trim().length() != 0) {
 					try {
 						fachada.removerAluno(matricula);
+						JOptionPane.showMessageDialog(null,"Aluno removido com sucesso.","Aluno Removido",JOptionPane.INFORMATION_MESSAGE);
+						txtMatriculaRemover.setText("");
 					} catch (AlunoNaoExistenteException e1) {
 						JOptionPane.showMessageDialog(
 								null,

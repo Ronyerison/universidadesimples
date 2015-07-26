@@ -14,12 +14,14 @@ import br.ufpi.es.system.exception.VerificarExistenciaAlunoListaException;
 
 public class RepositorioListaAlunos implements IRepositorioAlunos {
 	private List<Aluno> alunos;
+	private int idAluno;
 
 	/**
 	 * Instancia a lista para armazenar os alunos.
 	 */
 	public RepositorioListaAlunos() {
 		this.alunos = new LinkedList<Aluno>();
+		this.idAluno = 0;
 		System.out.println("Instancia de lista");
 	}
 
@@ -37,6 +39,8 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 			throw new InserirListaException();
 		}
 		if (!verificaExistenciaAluno(aluno.getMatricula())){
+			aluno.setIdAluno(idAluno);
+			this.idAluno = idAluno + 1;
 			this.alunos.add(aluno);
 		}else{
 			throw new VerificarExistenciaAlunoListaException();

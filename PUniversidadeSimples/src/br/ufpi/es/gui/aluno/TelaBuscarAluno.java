@@ -19,6 +19,11 @@ import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 
+/**
+ * Classe que monta a Tela Buscar Aluno GUI
+ * @author armandosoaressousa
+ *
+ */
 public class TelaBuscarAluno extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +52,10 @@ public class TelaBuscarAluno extends JDialog {
 	private JTextField txtMatricula;
 	private JTextField txtCurso;
 	
+	/**
+	 * Monta a tela buscar aluno
+	 * @param f fachada principal
+	 */
 	public TelaBuscarAluno(Fachada f) {
 		// Configurações do dialog
 		setTitle("Buscar Aluno");

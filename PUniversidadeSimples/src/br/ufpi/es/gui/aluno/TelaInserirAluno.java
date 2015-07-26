@@ -20,6 +20,7 @@ import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Professor;
 
 /**
+ * Classe que monta a Tela Inserir Aluno
  * @author Neto Araújo
  *
  */
@@ -51,6 +52,10 @@ public class TelaInserirAluno extends JDialog {
 	private JButton botaoLimpar;
 	private JButton botaoInserir;
 	
+	/**
+	 * Monta a Tela inserir aluno
+	 * @param f fachada unica do sistema
+	 */
 	public TelaInserirAluno(Fachada f) {
 		// Configurações do dialog
 		setTitle("Inserir Aluno");

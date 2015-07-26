@@ -2,6 +2,11 @@ package br.ufpi.es.gui;
 
 import javax.swing.JFrame;
 
+/**
+ * Classe que monta a aplicacao GUI
+ * @author armandosoaressousa
+ *
+ */
 public class MainGui {
 
 	public static void main(String[] args) {

@@ -19,6 +19,11 @@ import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 
+/**
+ * Classe que monta a Tala Alterar Aluno
+ * @author armandosoaressousa
+ *
+ */
 public class TelaAlterarAluno extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -52,6 +57,11 @@ public class TelaAlterarAluno extends JDialog {
 	private JButton botaoLimpar;
 	private JButton botaoAlterar;
 
+	/**
+	 * Monta a tela alterar aluno
+	 * - Dado um aluno existente, busca no repositorio, passa os dados alterados
+	 * @param f fachada
+	 */
 	public TelaAlterarAluno(Fachada f) {
 		// Configurações do dialog
 		setTitle("Alterar Aluno");
@@ -154,25 +164,31 @@ public class TelaAlterarAluno extends JDialog {
 		botaoAlterar = new JButton("Alterar");
 		botaoAlterar.setFont(new Font("sans-serif", Font.BOLD, 13));
 
-		// Adiciona listener do botão "Inserir"
+		// Adiciona listener do botão "Alterar"
 		botaoAlterar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Aluno alunoAux = new Aluno("","","");
 				if (isDadosValidos()) {
-					Aluno aluno = new Aluno(txtMatricula.getText(), txtNome
-							.getText(), txtCurso.getText());
+					String matricula = txtMatriculaBusca.getText();
 					try {
-						fachada.alterarAluno(aluno);
-
-						JOptionPane.showMessageDialog(null,
-								"Aluno alterado com sucesso.",
-								"Aluno Alterado",
-								JOptionPane.INFORMATION_MESSAGE);
-
+						alunoAux = fachada.buscarAluno(matricula);
+					} catch (AlunoNaoExistenteException e2) {
+						JOptionPane.showMessageDialog(null,"Aluno nao existe",e2.getMessage(),JOptionPane.INFORMATION_MESSAGE);
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null,"Erro ao buscar aluno",e2.getMessage(),JOptionPane.INFORMATION_MESSAGE);
+					}
+					Aluno a2 = new Aluno(txtMatricula.getText(), txtNome.getText(),txtCurso.getText());
+					a2.setIdAluno(alunoAux.getIdAluno());
+					try {
+						fachada.alterarAluno(a2);
+						JOptionPane.showMessageDialog(null,"Aluno alterado com sucesso.","Aluno Alterado",JOptionPane.INFORMATION_MESSAGE);
+						txtMatriculaBusca.setText("");
+						txtMatricula.setText("");
+						txtNome.setText("");
+						txtCurso.setText("");
 					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null,
-								"Não foi possível alterar o aluno.", "Erro",
-								JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,"Não foi possível alterar o aluno.", "Erro",JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -187,21 +203,22 @@ public class TelaAlterarAluno extends JDialog {
 				boolean dadosValidos = true;
 				String erro = "Os seguintes campos apresentam erros:\n";
 
-				if (txtNome.getText().trim().length() == 0) {
+				if (txtNome.getText().equals("")) {
 					erro += "- Nome.\n";
 					dadosValidos = false;
 				}
-				if (txtMatricula.getText().trim().length() == 0) {
+				if (txtMatricula.getText().equals("")) {
 					erro += "- Matrícula.\n";
 					dadosValidos = false;
 				}
-				if (txtCurso.getText().trim().length() == 0) {
+				if (txtCurso.getText().equals("")) {
 					erro += "- Curso.\n";
 					dadosValidos = false;
 				}
 
-				JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
-						JOptionPane.ERROR_MESSAGE);
+				if (!dadosValidos){
+					JOptionPane.showMessageDialog(null, erro, "Dados Inválidos", JOptionPane.ERROR_MESSAGE);
+				}
 
 				return dadosValidos;
 			}

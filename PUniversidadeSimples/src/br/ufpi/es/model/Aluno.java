@@ -17,7 +17,6 @@ public class Aluno {
 		this.matricula = matricula;
 		this.nome = nome;
 		this.curso = curso;
-		this.idAluno = 0;
 		this.turma = new LinkedList<Turma>();
 	}
 
