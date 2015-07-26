@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.ufpi.es.controller.Fachada;
@@ -16,19 +17,30 @@ import br.ufpi.es.model.Aluno;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 
 public class AlunosTest {
+	IFachada fachada;
+	
+	/**
+	 * Inicializa a fachada unica para todo o sistema
+	 */
+	@Before
+	public void setup(){
+		this.fachada = new Fachada();
+	}
 
+	/**
+	 * Testa de os alunos foram inseridos no repositorio
+	 * @throws SQLException
+	 */
 	@Test
 	public void addAluno() throws SQLException {
-		IFachada fachada = new Fachada();
 		// Instancia de alunos
-		Aluno aluno1 = new Aluno("201100000", "Francisco Wermeson",
-				"Ciência da Computação");
-		Aluno aluno2 = new Aluno("201149100", "João", "Ciência da Computação");
-		Aluno aluno3 = new Aluno("201149101", "Pedro", "Matemática");
-		Aluno aluno4 = new Aluno("201149102", "Maria", "Matemática");
-		Aluno aluno5 = new Aluno("201149103", "José", "Ciência da Computação");
+		Aluno aluno1 = new Aluno("201100000", "Francisco Wermeson", "Ciencia da Computacao");
+		Aluno aluno2 = new Aluno("201149100", "Joao", "Ciancia da Computacoo");
+		Aluno aluno3 = new Aluno("201149101", "Pedro", "Matematica");
+		Aluno aluno4 = new Aluno("201149102", "Maria", "Matematica");
+		Aluno aluno5 = new Aluno("201149103", "Jose", "Ciencia da Computacoo");
 
-		// Salvando alunos no repositório
+		// Salvando alunos no repositorio
 		try {
 			fachada.inserirAluno(aluno1);
 			fachada.inserirAluno(aluno2);
@@ -41,13 +53,14 @@ public class AlunosTest {
 		}
 	}
 
+	/**
+	 * Insere dois alunos e checa se os dois alunos ao serem buscados correspondem as informacoes armazenadas
+	 * @throws Exception
+	 */
 	@Test
 	public void buscarAluno() throws Exception {
-		IFachada fachada = new Fachada();
-
-		Aluno aluno1 = new Aluno("201100000", "Francisco Wermeson",
-				"Ciência da Computação");
-		Aluno aluno2 = new Aluno("201149101", "Pedro", "Matemática");
+		Aluno aluno1 = new Aluno("201100000", "Francisco Wermeson", "Ciencia da Computacao");
+		Aluno aluno2 = new Aluno("201149101", "Pedro", "Matematica");
 
 		fachada.inserirAluno(aluno1);
 		fachada.inserirAluno(aluno2);
@@ -58,25 +71,27 @@ public class AlunosTest {
 			assertNotNull(aluno1);
 			assertNotNull(aluno2);
 
-			assertEquals("201100000", aluno1.getMatricula()); // Matricula
+			assertEquals("201100000", aluno1.getMatricula()); 
 			assertEquals("Francisco Wermeson", aluno1.getNome());
-			assertEquals("Ciência da Computação", aluno1.getCurso());
+			assertEquals("Ciencia da Computacao", aluno1.getCurso());
 
 			assertEquals("201149101", aluno2.getMatricula());
 			assertEquals("Pedro", aluno2.getNome());
-			assertEquals("Matemática", aluno2.getCurso());
+			assertEquals("Matematica", aluno2.getCurso());
 		} catch (AlunoNaoExistenteException e) {
 			assertTrue(false);
 		}
 	}
 
+	/**
+	 * Insere dois alunos e checa a listagem
+	 * @throws Exception
+	 */
 	@Test
 	public void listaAlunos() throws Exception {
-		IFachada fachada = new Fachada();
 		List<Aluno> listaAlunos = new ArrayList<Aluno>();
-		Aluno aluno1 = new Aluno("201100000", "Francisco Wermeson",
-				"Ciência da Computação");
-		Aluno aluno2 = new Aluno("201149101", "Pedro", "Matemática");
+		Aluno aluno1 = new Aluno("201100000", "Francisco Wermeson", "Ciencia da Computacao");
+		Aluno aluno2 = new Aluno("201149101", "Pedro", "Matematica");
 
 		fachada.inserirAluno(aluno1);
 		fachada.inserirAluno(aluno2);

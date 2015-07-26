@@ -20,11 +20,11 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 	 */
 	public RepositorioListaAlunos() {
 		this.alunos = new LinkedList<Aluno>();
-		System.out.println("Inst�ncia de lista");
+		System.out.println("Instancia de lista");
 	}
 
 	/**
-	 * M�todo que insere um determinado aluno na lista.
+	 * Metodo que insere um determinado aluno na lista.
 	 * 
 	 * @param aluno
 	 *            .
@@ -44,11 +44,11 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 	}
 
 	/**
-	 * M�todo que busca um aluno na lista pela maticula. A matricula do aluno
+	 * Metodo que busca um aluno na lista pela maticula. A matricula do aluno
 	 * deve ser informada.
 	 * 
 	 * @param matricula
-	 *            .
+	 *            
 	 * @return aluno.
 	 */
 	@Override
@@ -66,11 +66,11 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 	}
 
 	/**
-	 * M�todo que verifica se um determinado aluno est� na lista. A matricula do
-	 * aluno deve ser passada como par�metro da pesquisa.
+	 * Metodo que verifica se um determinado aluno esta na lista. A matricula do
+	 * aluno deve ser passada como parametro da pesquisa.
 	 * 
 	 * @param matricula
-	 *            .
+	 *            
 	 * @return boolean
 	 * @throws VerificarExistenciaAlunoListaException
 	 */
@@ -89,8 +89,8 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 	}
 
 	/**
-	 * Altera um aluno. A op��o do atributo a ser alterado, a matricula do aluno
-	 * e a nova informa��o devem ser passadas para o m�todo. As op��es s�o: 1 -
+	 * Altera um aluno. A opcao do atributo a ser alterado, a matricula do aluno
+	 * e a nova informacao devem ser passadas para o metodo. As opcoes sao: 1 -
 	 * Matricula 2 - Nome 3 - Curso.
 	 * 
 	 * @param op
@@ -117,11 +117,6 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 		}
 	}
 
-	// @Override
-	// public void alterarAluno(Aluno aluno) throws AlunoNaoExistenteException{
-	//
-	// }
-
 	/**
 	 * Remove um determinado aluno da lista. A matricula do aluno deve ser
 	 * informada.
@@ -138,9 +133,9 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 	}
 
 	/**
-	 * M�todo que retorna todos os alunos inseridos na lista.
+	 * Metodo que retorna todos os alunos inseridos na lista.
 	 * 
-	 * @return alunos.
+	 * @return alunos
 	 */
 	@Override
 	public List<Aluno> listarAlunos() throws AlunosNaoCadastradosException {
@@ -151,9 +146,9 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 	}
 
 	/**
-	 * Informa a quantidade de alunos que est�o inseridos na lista.
+	 * Informa a quantidade de alunos que estao inseridos na lista.
 	 * 
-	 * @return alunos.size().
+	 * @return 	quantidade
 	 */
 	@Override
 	public int quantidadeAlunos() {

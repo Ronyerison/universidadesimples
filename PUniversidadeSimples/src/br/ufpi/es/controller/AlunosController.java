@@ -38,7 +38,7 @@ public class AlunosController {
 	 * Dada a matricula retorna o Aluno
 	 * 
 	 * @param matricula
-	 * @return
+	 * @return aluno
 	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
@@ -60,8 +60,8 @@ public class AlunosController {
 	}
 
 	/**
-	 * Dado um aluno faz a atualizacao com os novos dados. Op��o do dado campo a
-	 * ser alterado, a matricula do aluno e a nova informa��o. As op��es s�o: 1
+	 * Dado um aluno faz a atualizacao com os novos dados. Opcoo do dado campo a
+	 * ser alterado, a matricula do aluno e a nova informacao. As opcoes sao: 1
 	 * - Matricula 2 - Nome 3 - Curso.
 	 * 
 	 * @param op
@@ -70,7 +70,6 @@ public class AlunosController {
 	 */
 
 	public void alterarAluno(Aluno a) throws Exception {
-		// TODO Auto-generated method stub
 		this.controleAlunos.alterarAluno(a);
 	}
 
@@ -89,7 +88,7 @@ public class AlunosController {
 	/**
 	 * Listar os alunos do repositorio
 	 * 
-	 * @return
+	 * @return lista de alunos
 	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
