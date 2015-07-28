@@ -88,11 +88,12 @@ public class TelaBuscarTurma extends JDialog {
 		// Adiciona o listener ao botão "Buscar"
 		buttonBuscar.addActionListener(new ActionListener() {
 			@Override
+			//TODO acrescentar um campo para mostrar o identificador da turma
 			public void actionPerformed(ActionEvent e) {
-				String matricula = txtDisciplinaBusca.getText();
-				if (matricula.compareTo("") != 0) { // verifica se o usuário preencheu a matrícula
+				String idTurma = txtDisciplinaBusca.getText();
+				if (idTurma.compareTo("") != 0) { // verifica se o usuário preencheu o identificador da turma
 					try {
-						Turma turma = fachada.buscarTurma(matricula);
+						Turma turma = fachada.buscarTurma(Integer.valueOf(idTurma));
 						txtDepartamento.setText(turma.getDepartamento());
 						txtCargaHoraria.setText(String.valueOf(turma.getCargaHoraria()));
 					} catch (TurmaNaoExistenteException e1) {

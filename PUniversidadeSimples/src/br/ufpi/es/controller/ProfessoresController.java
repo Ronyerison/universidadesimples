@@ -110,11 +110,11 @@ public class ProfessoresController {
 	 */
 	public List<Turma> listarTurmaPorProfessor(Professor p)
 			throws ProfessorSemTurmaException {
-		if (p.getTurma().size() == 0) {
+		if (p.getTurmas().size() == 0) {
 			throw new ProfessorSemTurmaException();
 		}
 		List<Turma> l = new LinkedList<Turma>();
-		for (Turma t : p.getTurma()) {
+		for (Turma t : p.getTurmas()) {
 			l.add(t);
 		}
 
@@ -129,7 +129,7 @@ public class ProfessoresController {
 	 *            , turma.
 	 */
 	public void associaProfessorTurma(Professor professor, Turma turma) {
-		professor.getTurma().add(turma); // Adiciona uma turma ao professor.
+		professor.getTurmas().add(turma); // Adiciona uma turma ao professor.
 		turma.setProfessor(professor); // relaciona o professo a turma.
 	}
 
@@ -140,7 +140,7 @@ public class ProfessoresController {
 	 *            , turma.
 	 */
 	public void removeProfessorTurma(Professor professor, Turma turma) {
-		professor.getTurma().remove(turma);
+		professor.getTurmas().remove(turma);
 		turma.setProfessor(null);
 	}
 

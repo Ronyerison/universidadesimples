@@ -98,13 +98,13 @@ public class TelaAlterarTurma extends JDialog {
 		buttonBuscar.setFont(new Font("sans-serif", Font.BOLD, 13));
 		// Adiciona o listener ao botão "Buscar"
 		buttonBuscar.addActionListener(new ActionListener() {
+			//TO DO acrescentar o campo para mostrar o id da turma
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String disciplina = txtDisciplinaBusca.getText();
-				if (disciplina.compareTo("") != 0) { // verifica se o usuário
-													// preencheu a matrícula
+				String idTurma = txtDisciplinaBusca.getText();
+				if (idTurma.compareTo("") != 0) { // verifica se o usuário o id da turma
 					try {
-						Turma turma = fachada.buscarTurma(disciplina);
+						Turma turma = fachada.buscarTurma(Integer.valueOf(idTurma));
 						txtDepartamento.setText(turma.getDepartamento());
 						txtDisciplina.setText(turma.getDisciplina());
 						txtCargaHoraria.setText(String.valueOf(turma.getCargaHoraria()));

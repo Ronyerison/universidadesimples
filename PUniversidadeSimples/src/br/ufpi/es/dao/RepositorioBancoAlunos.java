@@ -4,8 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufpi.es.model.Aluno;
+import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
 import br.ufpi.es.system.util.ConnectionManager;
@@ -130,7 +132,7 @@ public class RepositorioBancoAlunos implements IRepositorioAlunos {
 	}
 
 	/**
-	 * M�todo que remove um aluno do banco de dados.
+	 * Metodo que remove um aluno do banco de dados.
 	 * 
 	 * @param matricula
 	 */
@@ -147,6 +149,23 @@ public class RepositorioBancoAlunos implements IRepositorioAlunos {
 		PreparedStatement statement = ConnectionManager
 				.reservaPreparedStatement(remover);
 		statement.setString(1, matricula);
+
+		statement.execute();
+		statement.close();
+	}
+	
+	public void removerAluno(Aluno aluno)
+			throws AlunoNaoExistenteException, Exception {
+		// TODO Auto-generated method stub
+
+		if (this.verificaExistenciaAluno(aluno.getMatricula()) == false) {
+			throw new AlunoNaoExistenteException();
+		}
+
+		String remover = "delete from aluno where matricula=?";
+		PreparedStatement statement = ConnectionManager
+				.reservaPreparedStatement(remover);
+		statement.setString(1, aluno.getMatricula());
 
 		statement.execute();
 		statement.close();
@@ -205,6 +224,12 @@ public class RepositorioBancoAlunos implements IRepositorioAlunos {
 		result.close();
 		statement.close();
 		return cont;
+	}
+
+	@Override
+	public List<Turma> listarTurmas(Aluno aluno) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

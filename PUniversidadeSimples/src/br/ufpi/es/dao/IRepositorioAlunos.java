@@ -3,6 +3,7 @@ package br.ufpi.es.dao;
 import java.util.List;
 
 import br.ufpi.es.model.Aluno;
+import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
 import br.ufpi.es.system.exception.InserirListaException;
@@ -59,6 +60,14 @@ public interface IRepositorioAlunos {
 	 */
 	public void removerAluno(String matricula)
 			throws AlunoNaoExistenteException, Exception;
+	
+	/**
+	 * Remove um aluno da lista
+	 * @param aluno
+	 * @throws Exception 
+	 * @throws AlunoNaoExistenteException 
+	 */
+	public void removerAluno(Aluno aluno) throws AlunoNaoExistenteException, Exception;
 
 	/**
 	 * Lista todos os alunos do repositorio de alunos
@@ -76,5 +85,12 @@ public interface IRepositorioAlunos {
 	 * @throws Exception
 	 */
 	public int quantidadeAlunos() throws Exception;
+	
+	/**
+	 * Dado um aluno, lista suas turmas
+	 * @param aluno
+	 * @return lista de turmas
+	 */
+	public List<Turma> listarTurmas(Aluno aluno);
 
 }

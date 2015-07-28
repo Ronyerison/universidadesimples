@@ -21,12 +21,12 @@ public interface IFachada {
 	/*###################  ALUNOS ######################*/
 	public void inserirAluno(Aluno aluno) throws Exception; 
 	public void alterarAluno(Aluno a) throws Exception;
-	public void removerAluno(Aluno aluno) throws AlunoNaoExistenteException;
+	public void removerAluno(Aluno aluno) throws AlunoNaoExistenteException, Exception;
 	public void removerAluno(String matricula) throws AlunoNaoExistenteException, Exception;
 	public Aluno buscarAluno(String matricula) throws AlunoNaoExistenteException, Exception;
 	public List<Aluno> listarAlunos() throws  AlunosNaoCadastradosException, Exception;
-	public void matricularAlunoTurma(Aluno a, Turma t);
-	public void trancarTurmaAluno(Aluno a, Turma t);
+	public void matricularAlunoTurma(Aluno a, Turma t) throws TurmasNaoCadastradasException;
+	public void trancarTurmaAluno(Aluno a, Turma t) throws AlunoNaoExistenteException, TurmasNaoCadastradasException;
 	public boolean verificaSeExisteAluno(String matricula) throws Exception;
 	public int quantidadeAlunos() throws Exception;
 	
@@ -44,13 +44,13 @@ public interface IFachada {
 	
 	/*################### TURMAS ######################*/
 	public void inserirTurma(Turma turma);
-	public void alterarTurma(int op, String disciplina, String info) throws  TurmaNaoExistenteException;
-	public void removerTurma(String discplina) throws TurmaNaoExistenteException;
-	public Turma buscarTurma(String discplina) throws TurmaNaoExistenteException;
+	public void alterarTurma(int op, int identificador, String info) throws  TurmaNaoExistenteException;
+	public void removerTurma(int identificador) throws TurmaNaoExistenteException;
+	public Turma buscarTurma(int identificador) throws TurmaNaoExistenteException;
 	public List<Turma> listarTurmas() throws TurmasNaoCadastradasException;
 	public List<Aluno> listarAlunoPorTurma(Turma t) throws TurmaSemAlunoException;
 	public int quantidadeTurma();
-	public boolean verificaExistenciaTurma(String disciplina);
+	public boolean verificaExistenciaTurma(int identificador);
 	public List<Turma> listarTurmasPorDepartamento(String departamento) throws TurmasNaoCadastradasException, DepartamentoNaoExisteException;
 	
 }

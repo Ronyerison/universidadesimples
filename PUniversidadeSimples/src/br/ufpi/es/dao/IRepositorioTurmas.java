@@ -2,39 +2,38 @@ package br.ufpi.es.dao;
 
 import java.util.List;
 
+import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.TurmaNaoExistenteException;
 import br.ufpi.es.system.exception.TurmasNaoCadastradasException;
+import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 
 public interface IRepositorioTurmas {
 
 	/**
 	 * Insere uma turma.
-	 * 
 	 * @param turma
 	 * @throws
 	 */
 	public void insereTurma(Turma turma);
 
 	/**
-	 * Dada a descri��o da disciplina, retorna um turma.
+	 * Dada a descricao da disciplina, retorna um turma.
 	 * 
 	 * @param descricao
-	 *            .
 	 * @return turma.
 	 * @throws TurmaNaoExistenteException.
 	 */
-	public Turma buscarTurma(String disciplina)
+	public Turma buscarTurma(int idenficador)
 			throws TurmaNaoExistenteException;
 
 	/**
 	 * Checa se existe turma dada a descricao.
 	 * 
 	 * @param descricao
-	 *            .
 	 * @return true se existe, false se nao existe.
 	 */
-	public boolean verificaExistenciaTurma(String disciplina);
+	public boolean verificaExistenciaTurma(int idenficador);
 
 	/**
 	 * Metodo que altera os dados de uma determinada turma. A opcao do atributo
@@ -43,20 +42,20 @@ public interface IRepositorioTurmas {
 	 * de alunos.
 	 * 
 	 * @param op
-	 *            , disciplina, info.
+	 * @param identificador
+	 * @param info
 	 * @throws TurmaNaoExistenteException
 	 */
-	public void alterarTurma(int op, String disciplina, String info)
+	public void alterarTurma(int op, int identificador, String info)
 			throws TurmaNaoExistenteException;
 
 	/**
-	 * Dada a descri��o da disciplina, remove a turma.
+	 * Dada a descricao da disciplina, remove a turma.
 	 * 
 	 * @param disciplina
-	 *            .
 	 * @throws TurmaNaoExistenteException.
 	 */
-	public void removerTurma(String disciplina)
+	public void removerTurma(int identificador)
 			throws TurmaNaoExistenteException;
 
 	/**
@@ -69,8 +68,31 @@ public interface IRepositorioTurmas {
 
 	/**
 	 * Quantidade de turmas no repositorio
-	 * 
-	 * @return quantidade.
+	 * @return quantidade
 	 */
 	public int quantidadeTurmas();
+	
+	/**
+	 * Dada uma turma especifica, insere o aluno dado
+	 * @param aluno
+	 * @param turma
+	 * @throws TurmasNaoCadastradasException
+	 */
+	public void insereAlunoTurma(Aluno aluno, Turma turma) throws TurmasNaoCadastradasException;
+	
+	/**
+	 * Dada uma turma especifica, remove o aluno dado
+	 * @param aluno
+	 * @param turma
+	 * @throws AlunoNaoExistenteException
+	 * @throws TurmasNaoCadastradasException
+	 */
+	public void removeAlunoTurma(Aluno aluno, Turma turma) throws AlunoNaoExistenteException, TurmasNaoCadastradasException;	
+	
+	/**
+	 * Dada uma turma, lista seus alunos
+	 * @param turma
+	 * @return lista de alunos
+	 */
+	public List<Aluno> listaAlunos(Turma turma);
 }

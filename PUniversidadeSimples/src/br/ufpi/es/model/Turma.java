@@ -4,22 +4,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Turma {
+	private int idTurma;
 	private String departamento;
 	private String disciplina;
 	private int cargaHoraria;
 	private int quantidadeAlunos;
 	private Professor professor;
-	private List<Aluno> aluno;
+	private List<Aluno> alunos;
 	
 	/*
 	 * Cria uma instancia passando alguns dos atributos diretamente na criacao do objeto.
 	 */
-	
 	public Turma(String departamento, String disciplina, int horario) {
 		this.departamento = departamento;
 		this.disciplina = disciplina;
 		this.cargaHoraria = horario;
-		this.aluno = new LinkedList<Aluno>();
+		this.alunos = new LinkedList<Aluno>();
 	}
 	
 	/*
@@ -49,10 +49,34 @@ public class Turma {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-	public List<Aluno> getAluno() {
-		return aluno;
+	public List<Aluno> getAlunos() {
+		return alunos;
 	}
 
+	/**
+	 * Insere uma lista de alunos
+	 * @param aluno
+	 */
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}	
+	
+	/**
+	 * Insere um dado aluno na lista de alunos
+	 * @param aluno
+	 */
+	public void insereAluno(Aluno aluno){
+		alunos.add(aluno);
+	}
+	
+	/**
+	 * Remove um dado aluno na lista de alunos
+	 * @param aluno
+	 */
+	public void removeAluno(Aluno aluno){
+		alunos.remove(aluno);
+	}
+	
 	/**
 	 * @return the quantidadeAlunos
 	 */
@@ -67,4 +91,15 @@ public class Turma {
 		this.quantidadeAlunos = quantidadeAlunos;
 	}
 	
+	public int getIdTurma() {
+		return idTurma;
+	}
+
+	/**
+	 * Identificador unico da turma
+	 * @param idTurma
+	 */
+	public void setIdTurma(int idTurma) {
+		this.idTurma = idTurma;
+	}
 }

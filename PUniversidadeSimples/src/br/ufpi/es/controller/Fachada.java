@@ -53,7 +53,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Insere um aluno.
+	 * Insere um aluno no repositorio de alunos.
 	 * 
 	 * @throws RepositorioException
 	 */
@@ -63,15 +63,16 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Metodo altera os dados de um determinado aluno. A opcao do atributo a ser
+	 * Metodo altera os dados de um determinado aluno, de um repositorio de alunos. A opcao do atributo a ser
 	 * alterado, a matricula do aluno e a nova informacao devem ser informados.
 	 * * As opcoes sao: 1 - Matricula 2 - Nome 3 - Curso.
 	 * 
 	 * @param op
-	 *            , matricula, info.
+	 * @param matricula
+	 * @param info.
 	 * @throws Exception
 	 * @throws RepositorioException
-	 *             , AlunoNaoExistenteException
+	 * @throws AlunoNaoExistenteException
 	 */
 	@Override
 	public void alterarAluno(Aluno a) throws Exception {
@@ -79,12 +80,12 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Remove um determiando aluno.
+	 * Remove um determiando aluno do repositorio de alunos.
 	 * 
 	 * @param matricula
 	 *           
 	 * @throws RepositorioException
-	 *             , AlunoNaoExistenteException.
+	 * @throws AlunoNaoExistenteException
 	 */
 	@Override
 	public void removerAluno(String matricula)
@@ -93,11 +94,11 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Metodo que busca uma determinado aluno pela matricula.
+	 * Metodo que busca uma determinado aluno pela matricula no repositorio de alunos.
 	 * 
 	 * @param matricula
 	 * @throws RepositorioException
-	 *             , AlunoNaoExistenteException.
+	 * @throws AlunoNaoExistenteException
 	 */
 	@Override
 	public Aluno buscarAluno(String matricula)
@@ -106,12 +107,12 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Metodo que lista todos os alunos cadastrados.
+	 * Metodo que lista todos os alunos cadastrados no repositorio de alunos.
 	 * 
 	 * @return Lista de alunos.
 	 * @throws Exception
 	 * @throws RepositorioException
-	 *             , AlunosNaoCadastradosException.
+	 * @throws AlunosNaoCadastradosException
 	 */
 	@Override
 	public List<Aluno> listarAlunos() throws AlunosNaoCadastradosException,
@@ -120,7 +121,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * retorna a quantidade alunos inseridos no repositorio.
+	 * retorna a quantidade alunos inseridos no repositorio de alunos.
 	 * 
 	 * @throws Exception
 	 */
@@ -129,7 +130,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Dada a matricula do aluno, checa se ele existe
+	 * Dada a matricula do aluno, checa se ele existe no repositorio de alunos
 	 * 
 	 * @param matricula
 	 * @return true se existe
@@ -141,22 +142,23 @@ public class Fachada implements IFachada {
 
 	/* ###################### PROFESSORES ############################ */
 	/**
-	 * Insere um professor.
+	 * Insere um professor no repositorio de professores.
 	 * 
 	 * @param professor
-	 * @throws RepositorioException.
+	 * @throws RepositorioException
 	 */
 	public void inserirProfessor(Professor professor) {
 		this.meuControleProfessor.inserir(professor);
 	}
 
 	/**
-	 * Metodo que altera os dados de um determinado professor. A opcao do
+	 * Metodo que altera os dados de um determinado professor no repositorio de professores. A opcao do
 	 * atributo a ser alterado, o cpf do professor e a nova informacao devem ser
 	 * passados para o metodo. * As opcoes sao: 1 - CPF 2 - Nome 3 - Titulo 4 - Lotacao
 	 * 
 	 * @param op
-	 *            , cpf, info.
+	 * @param cpf
+	 * @param info.
 	 * @throws BuscaListaException 
 	 */
 	public void alterarProfessor(int op, String cpf, String info)
@@ -168,7 +170,6 @@ public class Fachada implements IFachada {
 	 * Verifica se um determinado professor esta presente no repositorio.
 	 * 
 	 * @param cpf
-	 *            .
 	 * @return false, se nao existe; true, caso exista.
 	 * @throws RepositorioException
 	 */
@@ -177,7 +178,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Remove um determiando professor.
+	 * Remove um determiando professor do repositorio de professores.
 	 * 
 	 * @param cpf
 	 * @throws BuscaListaException 
@@ -188,7 +189,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Metodo que busca uma determinado professor pelo cpf.
+	 * Metodo que busca uma determinado professor pelo cpf do repositorio de professores.
 	 * 
 	 * @param cpf
 	 * @throws BuscaListaException 
@@ -200,7 +201,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Metodo que lista todos os professores cadastrados.
+	 * Metodo que lista todos os professores cadastrados no repositorio de professores.
 	 */
 	@Override
 	public List<Professor> listarProfessores()
@@ -219,13 +220,25 @@ public class Fachada implements IFachada {
 			throws ProfessorSemTurmaException {
 		return this.meuControleProfessor.listarTurmaPorProfessor(professor);
 	}
+	
+	/**
+	 * Retorna a quantidade de turmas de um professor
+	 * @param professor
+	 * @return quantidade de turmas
+	 * @throws ProfessorSemTurmaException
+	 */
+	public int qtdTurmasPorProfessor(Professor professor) throws ProfessorSemTurmaException {
+		List<Turma> turmasAux;
+		turmasAux = listarTurmaPorProfessor(professor);
+		return (turmasAux.size());
+	}
 
 	/**
 	 * Dados um professor e uma turma, relaciona a turma ao professor e
 	 * vice-versa.
 	 * 
 	 * @param professor
-	 *            , turma.
+	 * @param turma
 	 */
 	public void associarProfessorTurma(Professor professor, Turma turma) {
 		this.meuControleProfessor.associaProfessorTurma(professor, turma);
@@ -235,7 +248,7 @@ public class Fachada implements IFachada {
 	 * Dados um professor e um turma, remove a turma do professor.
 	 * 
 	 * @param professor
-	 *            , turma.
+	 * @param turma
 	 */
 	public void removerProfessorTurma(Professor professor, Turma turma) {
 		this.meuControleProfessor.removeProfessorTurma(professor, turma);
@@ -251,63 +264,62 @@ public class Fachada implements IFachada {
 	/* ###################### TURMAS ############################ */
 
 	/**
-	 * Insere uma turma.
+	 * Insere uma turma no repositorio de turmas.
 	 * 
 	 * @param turma
-	 *            .
-	 * @throws RepositorioException.
+	 * @throws RepositorioException
 	 */
 	public void inserirTurma(Turma turma) {
 		this.meuControleTurmas.inserir(turma);
 	}
 
 	/**
-	 * Metodo que altera os dados de uma determinada turma. A opcao do atributo
+	 * Metodo que altera os dados de uma determinada turma no repositorio de turmas. A opcao do atributo
 	 * a ser alterado, a disciplina e a nova informacao devem ser informados. As
 	 * opcoes sao: 1 - Departamento. 2 - Disciplina 3 - Horario 4 - Quantidade
 	 * de alunos.
 	 * 
 	 * @param op
-	 *            , disciplina, info.
+	 * @param identificador
+	 * @param info
 	 * @throws RepositorioException
-	 *             , TurmaNaoExistenteException
+	 * @throws TurmaNaoExistenteException
 	 */
-	public void alterarTurma(int op, String disciplina, String info)
+	public void alterarTurma(int op, int identificador, String info)
 			throws TurmaNaoExistenteException {
-		this.meuControleTurmas.alterar(op, disciplina, info);
+		this.meuControleTurmas.alterar(op, identificador, info);
 	}
 
 	/**
-	 * Dada a descricao da disciplina, retorna um turma.
+	 * Dado o identificador da turma, retorna um turma.
 	 * 
-	 * @param descricao
+	 * @param identificador
 	 * @return turma.
 	 * @throws RepositorioException
-	 *             , TurmaNaoExistenteException.
+	 * @throws TurmaNaoExistenteException
 	 */
-	public Turma buscarTurma(String disciplina)
+	public Turma buscarTurma(int identificador)
 			throws TurmaNaoExistenteException {
-		return this.meuControleTurmas.buscar(disciplina);
+		return this.meuControleTurmas.buscar(identificador);
 	}
 
 	/**
-	 * Dada a descricao da disciplina, remove a turma.
+	 * Dado o identificador da turma, remove a turma.
 	 * 
-	 * @param disciplina
+	 * @param identificador
 	 * @throws RepositorioException
-	 *             , TurmaNaoExistenteException.
+	 * @throws TurmaNaoExistenteException
 	 */
-	public void removerTurma(String disciplina)
+	public void removerTurma(int identificador)
 			throws TurmaNaoExistenteException {
-		this.meuControleTurmas.remover(disciplina);
+		this.meuControleTurmas.remover(identificador);
 	}
 
 	/**
-	 * Lista todos as turmas do repositorio de turmas.
+	 * Lista todas as turmas do repositorio de turmas.
 	 * 
 	 * @return Lista de turmas.
-	 * @throws RepositorioException
-	 *             , ProfessoresNaoCadastradosException.
+	 * @throws TurmasNaoCadastradasException
 	 */
 	public List<Turma> listarTurmas() throws TurmasNaoCadastradasException {
 		return this.meuControleTurmas.listar();
@@ -317,9 +329,10 @@ public class Fachada implements IFachada {
 	 * Matricula um aluno em determinada turma.
 	 * 
 	 * @param aluno
-	 *            , turma.
+	 * @param turma
+	 * @throws TurmasNaoCadastradasException 
 	 */
-	public void matricularAlunoTurma(Aluno a, Turma t) {
+	public void matricularAlunoTurma(Aluno a, Turma t) throws TurmasNaoCadastradasException {
 		this.meuControleAlunos.matricularAlunoTurma(a, t);
 	}
 
@@ -327,9 +340,11 @@ public class Fachada implements IFachada {
 	 * Remove um aluno de uma deterteminada turma.
 	 * 
 	 * @param aluno
-	 *            , turma.
+	 * @param turma.
+	 * @throws TurmasNaoCadastradasException 
+	 * @throws AlunoNaoExistenteException 
 	 */
-	public void trancarTurmaAluno(Aluno a, Turma t) {
+	public void trancarTurmaAluno(Aluno a, Turma t) throws AlunoNaoExistenteException, TurmasNaoCadastradasException {
 		this.meuControleAlunos.trancarTurmaAluno(a, t);
 	}
 
@@ -339,8 +354,8 @@ public class Fachada implements IFachada {
 	 * @param departamento
 	 * @return Lista de turmas.
 	 * @throws RepositorioException
-	 *             , TurmasNaoCadastradasException,
-	 *             DepartamentoSemTurmaException
+	 * @throws TurmasNaoCadastradasException,
+	 * @throws DepartamentoSemTurmaException
 	 */
 	public List<Turma> listarTurmasPorDepartamento(String departamento)
 			throws TurmasNaoCadastradasException,
@@ -361,28 +376,39 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Retorna a quantidade de turmas existentes no repositorio.
+	 * Retorna a quantidade de turmas existentes no repositorio de turmas.
 	 * 
 	 * @return quantidade.
 	 */
 	public int quantidadeTurma() {
 		return this.meuControleTurmas.quantidadeTurmas();
 	}
-
+	
 	/**
-	 * Dada a a disciplina, checa se a turma existe
-	 * 
-	 * @param disciplina
-	 *            .
-	 * @return true se existe; false, se nao existe.
+	 * Retorna a quantidade de turmas de um aluno
+	 * @param aluno
+	 * @return quantidade de turmas
 	 */
-	public boolean verificaExistenciaTurma(String disciplina) {
-		return this.meuControleTurmas.verificaSeTurmaExiste(disciplina);
+	public int quantidadeTurmasAluno(Aluno aluno){
+		return(0);
 	}
 
-	@Override
-	public void removerAluno(Aluno aluno) throws AlunoNaoExistenteException {
-		// TODO Auto-generated method stub
+	/**
+	 * Dado o identificador de turma, checa se a turma existe
+	 * 
+	 * @param identificador
+	 * @return true se existe; false, se nao existe.
+	 */
+	public boolean verificaExistenciaTurma(int identificador) {
+		return this.meuControleTurmas.verificaSeTurmaExiste(identificador);
+	}
+
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+	public void removerAluno(Aluno aluno) throws AlunoNaoExistenteException, Exception{
+		this.meuControleAlunos.remover(aluno.getMatricula());
 	}
 
 }

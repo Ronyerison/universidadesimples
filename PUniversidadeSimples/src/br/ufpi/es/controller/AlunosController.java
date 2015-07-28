@@ -27,7 +27,6 @@ public class AlunosController {
 	 * Insere um aluno no repositorio
 	 * 
 	 * @param aluno
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
 	public void inserir(Aluno aluno) throws Exception{
@@ -39,7 +38,6 @@ public class AlunosController {
 	 * 
 	 * @param matricula
 	 * @return aluno
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
 	public Aluno buscar(String matricula) throws AlunoNaoExistenteException,
@@ -52,7 +50,6 @@ public class AlunosController {
 	 * 
 	 * @param matricula
 	 * @return true se existe
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
 	public boolean verificaSeAlunoExiste(String matricula) throws Exception {
@@ -65,7 +62,8 @@ public class AlunosController {
 	 * - Matricula 2 - Nome 3 - Curso.
 	 * 
 	 * @param op
-	 *            , matricula e info.
+	 * @param matricula
+	 * @param info
 	 * @throws RepositorioException
 	 */
 
@@ -77,19 +75,26 @@ public class AlunosController {
 	 * Dada a matricula do aluno, faz a remocao.
 	 * 
 	 * @param matricula
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
-	public void remover(String matricula) throws AlunoNaoExistenteException,
-			Exception {
+	public void remover(String matricula) throws AlunoNaoExistenteException, Exception {
 		this.controleAlunos.removerAluno(matricula);
+	}
+	
+	/**
+	 * Remove um aluno do repositorio de alunos.
+	 * @param aluno
+	 * @throws Exception 
+	 * @throws AlunoNaoExistenteException 
+	 */
+	public void remover(Aluno aluno) throws AlunoNaoExistenteException, Exception{
+		this.controleAlunos.removerAluno(aluno);
 	}
 
 	/**
 	 * Listar os alunos do repositorio
 	 * 
 	 * @return lista de alunos
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
 	public List<Aluno> listar() throws AlunosNaoCadastradosException, Exception {
@@ -100,32 +105,39 @@ public class AlunosController {
 	 * Realiza a matricula de aluno em uma determinada turma.
 	 * 
 	 * @param aluno
-	 *            , turma.
+	 * @param turma
 	 */
 	public void matricularAlunoTurma(Aluno a, Turma t) {
-		t.getAluno().add(a); // Adicionando aluno na turma.
-		a.getTurma().add(t);// Adicionando turma ao aluno.
+		t.getAlunos().add(a); // Adicionando aluno na turma.
+		a.getTurmas().add(t);// Adicionando turma ao aluno.
 	}
 
 	/**
 	 * Remove um determinado aluno de um turma.
 	 * 
 	 * @param aluno
-	 *            , turma.
+	 * @param turma
 	 */
 	public void trancarTurmaAluno(Aluno a, Turma t) {
-		a.getTurma().remove(t); // Removendo a turma de um aluno.
-		t.getAluno().remove(a); // Removendo um aluno da turma.
+		a.getTurmas().remove(t); // Removendo a turma de um aluno.
+		t.getAlunos().remove(a); // Removendo um aluno da turma.
 	}
 
 	/**
-	 * Retorna a quantidade de aluno inseridos no reposit�rio.
+	 * Retorna a quantidade de aluno inseridos no repositorio.
 	 * 
-	 * @return quantidadeAlunos.
-	 * @throws SQLException
+	 * @return quantidadeAlunos
 	 */
 	public int quantidadeAlunos() throws Exception {
 		return this.controleAlunos.quantidadeAlunos();
 	}
-
+	
+	/**
+	 * Dado um aluno, retorna suas turmas
+	 * @param aluno
+	 * @return lista de turmas
+	 */
+	public List<Turma> listarTurmas(Aluno aluno){
+		return this.controleAlunos.listarTurmas(aluno);
+	}
 }

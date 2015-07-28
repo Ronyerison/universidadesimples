@@ -7,6 +7,7 @@ import br.ufpi.es.dao.IRepositorioTurmas;
 import br.ufpi.es.dao.RepositorioListaTurmas;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
+import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 import br.ufpi.es.system.exception.DepartamentoNaoExisteException;
 import br.ufpi.es.system.exception.TurmaNaoExistenteException;
 import br.ufpi.es.system.exception.TurmaSemAlunoException;
@@ -40,25 +41,24 @@ public class TurmasController {
 	}
 
 	/**
-	 * Dada a disciplina, retorna a turma.
+	 * Dada a identificador, retorna a turma.
 	 * 
-	 * @param disciplina
+	 * @param identificador
 	 * @return turma.
 	 * @throws RepositorioException
 	 */
-	public Turma buscar(String disciplina) throws TurmaNaoExistenteException {
-		return this.controleTurmas.buscarTurma(disciplina);
+	public Turma buscar(int identificador) throws TurmaNaoExistenteException {
+		return this.controleTurmas.buscarTurma(identificador);
 	}
 
 	/**
-	 * Dada a a disciplina, checa se a turma existe
+	 * Dada a a identificador, checa se a turma existe
 	 * 
-	 * @param disciplina
-	 *            .
-	 * @return true se existe; false, se n�o existe.
+	 * @param identificador
+	 * @return true se existe; false, se nao existe.
 	 */
-	public boolean verificaSeTurmaExiste(String disciplina) {
-		return this.controleTurmas.verificaExistenciaTurma(disciplina);
+	public boolean verificaSeTurmaExiste(int identificador) {
+		return this.controleTurmas.verificaExistenciaTurma(identificador);
 	}
 
 	/**
@@ -68,24 +68,24 @@ public class TurmasController {
 	 * de alunos.
 	 * 
 	 * @param op
-	 *            , disciplina, info.
+	 * @param identificador
+	 * @param info
 	 * @throws RepositorioException
 	 *             , TurmaNaoExistenteException
 	 */
-	public void alterar(int op, String disciplina, String info)
+	public void alterar(int op, int identificador, String info)
 			throws TurmaNaoExistenteException {
-		this.controleTurmas.alterarTurma(op, disciplina, info);
+		this.controleTurmas.alterarTurma(op, identificador, info);
 	}
 
 	/**
-	 * Dada a disciplina, faz a remocao da turma.
+	 * Dada a identificador, faz a remocao da turma.
 	 * 
-	 * @param disciplina
-	 *            .
+	 * @param indentificador
 	 * @throws RepositorioException
 	 */
-	public void remover(String disciplina) throws TurmaNaoExistenteException {
-		this.controleTurmas.removerTurma(disciplina);
+	public void remover(int identificador) throws TurmaNaoExistenteException {
+		this.controleTurmas.removerTurma(identificador);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class TurmasController {
 	 * 
 	 * @return Lista de turmas.
 	 * @throws RepositorioException
-	 *             , AlunosNaoCadastradosException.
+	 * @throws AlunosNaoCadastradosException.
 	 */
 	public List<Turma> listar() throws TurmasNaoCadastradasException {
 		return this.controleTurmas.listarTurmas();
@@ -106,8 +106,8 @@ public class TurmasController {
 	 *            .
 	 * @return Lista de turmas.
 	 * @throws RepositorioException
-	 *             , TurmasNaoCadastradasException,
-	 *             DepartamentoSemTurmaException
+	 * @throws TurmasNaoCadastradasException,
+	 * @throws DepartamentoSemTurmaException
 	 */
 	public List<Turma> listarTurmasPorDepartamento(String departamento)
 			throws TurmasNaoCadastradasException,
@@ -132,22 +132,11 @@ public class TurmasController {
 	 * Lista todos os alunos que estao em uma determinada turma.
 	 * 
 	 * @param turma
-	 *            .
 	 * @return Lista de alunos.
 	 * @throws TurmaSemAlunoException
 	 */
-	public List<Aluno> listarAlunoPorTurma(Turma t)
-			throws TurmaSemAlunoException {
-
-		if (t.getAluno().size() == 0) {
-			throw new TurmaSemAlunoException();
-		}
-		List<Aluno> retorno = new LinkedList<Aluno>();
-		for (Aluno a : t.getAluno()) {
-			retorno.add(a);
-		}
-
-		return retorno;
+	public List<Aluno> listarAlunoPorTurma(Turma t){
+		return this.controleTurmas.listaAlunos(t);
 	}
 
 	/**
@@ -157,5 +146,26 @@ public class TurmasController {
 	 */
 	public int quantidadeTurmas() {
 		return this.controleTurmas.quantidadeTurmas();
+	}
+	
+	/**
+	 * Insere um aluno em uma dada turma
+	 * @param aluno
+	 * @param turma
+	 * @throws TurmasNaoCadastradasException
+	 */
+	public void inserirAlunoNaTurma(Aluno aluno, Turma turma) throws TurmasNaoCadastradasException{
+		controleTurmas.insereAlunoTurma(aluno, turma);
+	}
+	
+	/**
+	 * Dada uma turma, remove o aluno dado
+	 * @param aluno
+	 * @param turma
+	 * @throws AlunoNaoExistenteException
+	 * @throws TurmasNaoCadastradasException
+	 */
+	public void removerAlunoDaTurma(Aluno aluno, Turma turma) throws AlunoNaoExistenteException, TurmasNaoCadastradasException{
+		controleTurmas.removeAlunoTurma(aluno, turma);
 	}
 }

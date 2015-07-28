@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import br.ufpi.es.model.Aluno;
+import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.AlterarAlunoListaException;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
@@ -135,6 +136,14 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 		Aluno a = this.buscarAluno(matricula);
 		this.alunos.remove(a);
 	}
+	
+	/**
+	 * Remove um dado aluno no repositorio de alunos
+	 * @param aluno
+	 */
+	public void removerAluno(Aluno aluno){
+		this.alunos.remove(aluno);
+	}
 
 	/**
 	 * Metodo que retorna todos os alunos inseridos na lista.
@@ -158,5 +167,13 @@ public class RepositorioListaAlunos implements IRepositorioAlunos {
 	public int quantidadeAlunos() {
 		return this.alunos.size();
 	}
-
+	
+	/**
+	 * Dado um aluno, retorna suas turmas
+	 * @param aluno
+	 * @return lista de turmas
+	 */
+	public List<Turma> listarTurmas(Aluno aluno){
+		return(aluno.getTurmas());
+	}
 }

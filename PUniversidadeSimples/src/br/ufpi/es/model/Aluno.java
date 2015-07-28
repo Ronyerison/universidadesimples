@@ -8,7 +8,7 @@ public class Aluno {
 	private String matricula;
 	private String nome;
 	private String curso;
-	private List<Turma> turma;
+	private List<Turma> turmas;
 	
 	/*
 	 * Cria uma instancia passando os atributos diretamente na criacao do objeto
@@ -17,7 +17,7 @@ public class Aluno {
 		this.matricula = matricula;
 		this.nome = nome;
 		this.curso = curso;
-		this.turma = new LinkedList<Turma>();
+		this.turmas = new LinkedList<Turma>();
 	}
 
 	/*
@@ -42,8 +42,8 @@ public class Aluno {
 		this.curso = curso;
 	}
 
-	public List<Turma> getTurma() {
-		return turma;
+	public List<Turma> getTurmas() {
+		return turmas;
 	}
 
 	public int getIdAluno() {

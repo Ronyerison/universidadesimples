@@ -76,12 +76,13 @@ public class TelaRemoverTurma extends JDialog {
 		buttonRemover.setFont(new Font("sans-serif", Font.BOLD, 13));
 		// Adiciona o listener do botão "Remover"
 		buttonRemover.addActionListener(new ActionListener() {
+			//TO DO acrescentar o campo id da turma
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String disciplina = txtDisciplinaRemover.getText();
-				if (disciplina.trim().length() != 0) {
+				String idTurma = txtDisciplinaRemover.getText();
+				if (idTurma.trim().length() != 0) {
 					try {
-						fachada.removerTurma(disciplina);
+						fachada.removerTurma(Integer.valueOf(idTurma));
 					} catch (TurmaNaoExistenteException e1) {
 						JOptionPane.showMessageDialog(
 								null,
