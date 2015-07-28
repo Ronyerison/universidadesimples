@@ -82,6 +82,9 @@ public class TelaRemoverProfessor extends JDialog {
 				if (cpf.trim().length() != 0) {
 					try {
 						fachada.removerProfessor(cpf);
+						JOptionPane.showMessageDialog(null, "Professor removido com sucesso!","Informacao",
+								JOptionPane.INFORMATION_MESSAGE);
+						txtCpfRemover.setText("");
 					} catch (ProfessorNaoExistenteException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage()
 								+ ".", "Professor Não Existente",

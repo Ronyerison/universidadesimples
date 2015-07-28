@@ -7,6 +7,7 @@ import br.ufpi.es.model.Professor;
 import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
+import br.ufpi.es.system.exception.BuscaListaException;
 import br.ufpi.es.system.exception.DepartamentoNaoExisteException;
 import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
 import br.ufpi.es.system.exception.ProfessorSemTurmaException;
@@ -31,9 +32,9 @@ public interface IFachada {
 	
 	/*################### PROFESSORES ######################*/
 	public void inserirProfessor(Professor professor);
-	public void alterarProfessor(int op, String cpf, String info) throws ProfessorNaoExistenteException;
-	public void removerProfessor(String cpf) throws ProfessorNaoExistenteException;
-	public Professor buscarProfessor(String cpf) throws ProfessorNaoExistenteException;
+	public void alterarProfessor(int op, String cpf, String info) throws ProfessorNaoExistenteException, BuscaListaException;
+	public void removerProfessor(String cpf) throws ProfessorNaoExistenteException, BuscaListaException;
+	public Professor buscarProfessor(String cpf) throws ProfessorNaoExistenteException, BuscaListaException;
 	public List<Professor> listarProfessores() throws ProfessoresNaoCadastradosException;
 	public List<Turma> listarTurmaPorProfessor(Professor professor) throws ProfessorSemTurmaException;
 	public void associarProfessorTurma(Professor professor, Turma turma);

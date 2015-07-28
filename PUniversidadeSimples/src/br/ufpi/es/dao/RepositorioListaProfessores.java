@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import br.ufpi.es.model.Professor;
+import br.ufpi.es.system.exception.BuscaListaException;
 import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
 import br.ufpi.es.system.exception.ProfessoresNaoCadastradosException;
 
@@ -36,7 +37,10 @@ public class RepositorioListaProfessores implements IRepositorioProfessores {
 	 *            .
 	 */
 	public Professor buscarProfessor(String cpf)
-			throws ProfessorNaoExistenteException {
+			throws ProfessorNaoExistenteException, BuscaListaException {
+		if (cpf == null){
+			throw new BuscaListaException();
+		}
 		for (Professor p : this.professores) {
 			if (p.getCpf().equals(cpf)) {
 				return p;
@@ -50,7 +54,6 @@ public class RepositorioListaProfessores implements IRepositorioProfessores {
 	 * professor. CPF do professor e usado como parametro da busca.
 	 * 
 	 * @param cpf
-	 *            .
 	 * @return true, se existe; false, se nao existe.
 	 */
 	public boolean verificaExistenciaProfessor(String cpf) {
@@ -71,7 +74,7 @@ public class RepositorioListaProfessores implements IRepositorioProfessores {
 	 *            , cpf, info.
 	 */
 	public void alterarProfessor(int op, String cpf, String info)
-			throws ProfessorNaoExistenteException {
+			throws ProfessorNaoExistenteException, BuscaListaException {
 		Professor p = this.buscarProfessor(cpf);
 
 		switch (op) {
@@ -95,10 +98,10 @@ public class RepositorioListaProfessores implements IRepositorioProfessores {
 	 * informado.
 	 * 
 	 * @param cpf
-	 *            .
+	 * @throws BuscaListaException 
 	 */
 	public void removerProfessor(String cpf)
-			throws ProfessorNaoExistenteException {
+			throws ProfessorNaoExistenteException, BuscaListaException {
 		Professor p = this.buscarProfessor(cpf);
 		this.professores.remove(p);
 	}
@@ -119,7 +122,7 @@ public class RepositorioListaProfessores implements IRepositorioProfessores {
 	/**
 	 * Informa a quantidade de professores que estao inseridos na lista.
 	 * 
-	 * @return professores.size().
+	 * @return quantidade de professores
 	 */
 	public int quantidadeProfessor() {
 		return this.professores.size();

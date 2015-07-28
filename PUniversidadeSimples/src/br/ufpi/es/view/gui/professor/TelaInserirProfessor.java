@@ -172,9 +172,10 @@ public class TelaInserirProfessor extends JDialog {
 					dadosValidos = false;
 				}
 
-				JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
+				if(!dadosValidos){
+					JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
 						JOptionPane.ERROR_MESSAGE);
-
+				}
 				return dadosValidos;
 			}
 		});

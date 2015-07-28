@@ -64,11 +64,11 @@ public class TelaListarProfessores extends JDialog {
 			List<Professor> listaProfessores = fachada.listarProfessores(); // obtém a lista de professores
 			
 			for (Professor professor : listaProfessores) {
-				// Adiciona o aluno ao textArea
+				// Adiciona o professor ao textArea
 				txtProfessores.append(String.format("%-20s%-20s%-20s\n",
 						"CPF: " + professor.getCpf(),
 						"Nome: " + professor.getNome(),
-						"Matrícula: " + professor.getLotacao(),
+						"Lotacao: " + professor.getLotacao(),
 						"Título: " + professor.getTitulo()));
 			}
 		} catch (ProfessoresNaoCadastradosException e) {

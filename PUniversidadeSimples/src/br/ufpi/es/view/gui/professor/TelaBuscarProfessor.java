@@ -81,9 +81,9 @@ public class TelaBuscarProfessor extends JDialog {
 		labelCPF.setFont(new Font("sans-serif", Font.BOLD, 12));
 		labelNome = new JLabel("Nome:");
 		labelNome.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelLotacao = new JLabel("Matrícula:");
+		labelLotacao = new JLabel("Lotacao:");
 		labelLotacao.setFont(new Font("sans-serif", Font.BOLD, 12));
-		labelTitulo = new JLabel("Curso:");
+		labelTitulo = new JLabel("Titulo:");
 		labelTitulo.setFont(new Font("sans-serif", Font.BOLD, 12));
 		painelEsquerda.add(labelCpfBusca);
 		painelEsquerda.add(labelCPF);
@@ -101,8 +101,7 @@ public class TelaBuscarProfessor extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String cpf = txtCpfBusca.getText();
-				if (cpf.compareTo("") != 0) { // verifica se o usuário
-													// preencheu a matrícula
+				if (cpf.compareTo("") != 0) { // verifica se o usuário preencheu a matrícula								
 					try {
 						Professor professor = fachada.buscarProfessor(cpf);
 						txtCpf.setText(professor.getCpf());

@@ -15,6 +15,7 @@ import br.ufpi.es.model.Professor;
 import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.AlunoNaoExistenteException;
 import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
+import br.ufpi.es.system.exception.BuscaListaException;
 import br.ufpi.es.system.exception.DepartamentoNaoExisteException;
 import br.ufpi.es.system.exception.InserirListaException;
 import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
@@ -36,8 +37,8 @@ public class Fachada implements IFachada {
 	private IRepositorioTurmas repositorioTurmas;
 
 	/**
-	 * Construtor padr�o da classe Fachada. Ao instanciar um objeto do tipo
-	 * Fachada, � definido um tipo de reposit�rio para armazenar os dados.
+	 * Construtor padrao da classe Fachada. Ao instanciar um objeto do tipo
+	 * Fachada, e definido um tipo de repositorio para armazenar os dados.
 	 */
 	public Fachada() {
 		 this.repositorioListaAlunos = new RepositorioListaAlunos();
@@ -46,18 +47,14 @@ public class Fachada implements IFachada {
 		this.repositorioProfessores = new RepositorioListaProfessores();
 		this.repositorioTurmas = new RepositorioListaTurmas();
 
-		// this.meuControleAlunos = new
-		// AlunosController(repositorioListaAlunos);
 		this.meuControleAlunos = new AlunosController(repositorioListaAlunos);
-		this.meuControleProfessor = new ProfessoresController(
-				repositorioProfessores);
+		this.meuControleProfessor = new ProfessoresController(repositorioProfessores);
 		this.meuControleTurmas = new TurmasController(repositorioTurmas);
 	}
 
 	/**
 	 * Insere um aluno.
 	 * 
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
 	@Override
@@ -66,9 +63,9 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * M�todo altera os dados de um determinado aluno. A op��o do atributo a ser
-	 * alterado, a matricula do aluno e a nova informa��o devem ser informados.
-	 * * As op��es s�o: 1 - Matricula 2 - Nome 3 - Curso.
+	 * Metodo altera os dados de um determinado aluno. A opcao do atributo a ser
+	 * alterado, a matricula do aluno e a nova informacao devem ser informados.
+	 * * As opcoes sao: 1 - Matricula 2 - Nome 3 - Curso.
 	 * 
 	 * @param op
 	 *            , matricula, info.
@@ -85,8 +82,7 @@ public class Fachada implements IFachada {
 	 * Remove um determiando aluno.
 	 * 
 	 * @param matricula
-	 *            .
-	 * @throws SQLException
+	 *           
 	 * @throws RepositorioException
 	 *             , AlunoNaoExistenteException.
 	 */
@@ -97,11 +93,9 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * M�todo que busca uma determinado aluno pela matricula.
+	 * Metodo que busca uma determinado aluno pela matricula.
 	 * 
 	 * @param matricula
-	 *            .
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 *             , AlunoNaoExistenteException.
 	 */
@@ -112,7 +106,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * M�todo que lista todos os alunos cadastrados.
+	 * Metodo que lista todos os alunos cadastrados.
 	 * 
 	 * @return Lista de alunos.
 	 * @throws Exception
@@ -126,9 +120,9 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * retorna a quantidade alunos inseridos no reposit�rio.
+	 * retorna a quantidade alunos inseridos no repositorio.
 	 * 
-	 * @throws SQLException
+	 * @throws Exception
 	 */
 	public int quantidadeAlunos() throws Exception {
 		return this.meuControleAlunos.quantidadeAlunos();
@@ -139,7 +133,6 @@ public class Fachada implements IFachada {
 	 * 
 	 * @param matricula
 	 * @return true se existe
-	 * @throws SQLException
 	 * @throws RepositorioException
 	 */
 	public boolean verificaSeExisteAluno(String matricula) throws Exception {
@@ -151,7 +144,6 @@ public class Fachada implements IFachada {
 	 * Insere um professor.
 	 * 
 	 * @param professor
-	 *            .
 	 * @throws RepositorioException.
 	 */
 	public void inserirProfessor(Professor professor) {
@@ -159,25 +151,25 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * M�todo que altera os dados de um determinado professor. A op��o do
-	 * atributo a ser alterado, o cpf do professor e a nova informa��o devem ser
-	 * passados para o m�todo. * As op��es s�o: 1 - CPF 2 - Nome 3 - Titulo 4 -
-	 * Lota��o
+	 * Metodo que altera os dados de um determinado professor. A opcao do
+	 * atributo a ser alterado, o cpf do professor e a nova informacao devem ser
+	 * passados para o metodo. * As opcoes sao: 1 - CPF 2 - Nome 3 - Titulo 4 - Lotacao
 	 * 
 	 * @param op
 	 *            , cpf, info.
+	 * @throws BuscaListaException 
 	 */
 	public void alterarProfessor(int op, String cpf, String info)
-			throws ProfessorNaoExistenteException {
+			throws ProfessorNaoExistenteException, BuscaListaException {
 		this.meuControleProfessor.alterar(op, cpf, info);
 	}
 
 	/**
-	 * Verifica se um determinado professor est� presente no reposit�rio.
+	 * Verifica se um determinado professor esta presente no repositorio.
 	 * 
 	 * @param cpf
 	 *            .
-	 * @return false, se n�o existe; true, caso exista.
+	 * @return false, se nao existe; true, caso exista.
 	 * @throws RepositorioException
 	 */
 	public boolean verificaExistenciaProfessor(String cpf) {
@@ -188,26 +180,27 @@ public class Fachada implements IFachada {
 	 * Remove um determiando professor.
 	 * 
 	 * @param cpf
-	 *            .
+	 * @throws BuscaListaException 
 	 */
 	public void removerProfessor(String cpf)
-			throws ProfessorNaoExistenteException {
+			throws ProfessorNaoExistenteException, BuscaListaException {
 		this.meuControleProfessor.remover(cpf);
 	}
 
 	/**
-	 * M�todo que busca uma determinado professor pelo cpf.
+	 * Metodo que busca uma determinado professor pelo cpf.
 	 * 
 	 * @param cpf
+	 * @throws BuscaListaException 
 	 */
 	@Override
 	public Professor buscarProfessor(String cpf)
-			throws ProfessorNaoExistenteException {
+			throws ProfessorNaoExistenteException, BuscaListaException {
 		return this.meuControleProfessor.buscar(cpf);
 	}
 
 	/**
-	 * M�todo que lista todos os professores cadastrados.
+	 * Metodo que lista todos os professores cadastrados.
 	 */
 	@Override
 	public List<Professor> listarProfessores()
@@ -219,7 +212,6 @@ public class Fachada implements IFachada {
 	 * Dado um professor, retorna todas as turmas em que ele leciona.
 	 * 
 	 * @param professor
-	 *            .
 	 * @return Lista de turmas.
 	 * @throws ProfessorSemTurmaException
 	 */
@@ -250,7 +242,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * retorna a quantidade de professores inseridas no reposit�rio
+	 * retorna a quantidade de professores inseridas no repositorio
 	 */
 	public int quantidadeProfessores() {
 		return this.meuControleProfessor.quantidadeProfessores();
@@ -270,9 +262,9 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * M�todo que altera os dados de uma determinada turma. A op��o do atributo
-	 * a ser alterado, a disciplina e a nova informa��o devem ser informados. As
-	 * op��es s�o: 1 - Departamento. 2 - Disciplina 3 - Hor�rio 4 - Quantidade
+	 * Metodo que altera os dados de uma determinada turma. A opcao do atributo
+	 * a ser alterado, a disciplina e a nova informacao devem ser informados. As
+	 * opcoes sao: 1 - Departamento. 2 - Disciplina 3 - Horario 4 - Quantidade
 	 * de alunos.
 	 * 
 	 * @param op
@@ -286,10 +278,9 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Dada a descri��o da disciplina, retorna um turma.
+	 * Dada a descricao da disciplina, retorna um turma.
 	 * 
 	 * @param descricao
-	 *            .
 	 * @return turma.
 	 * @throws RepositorioException
 	 *             , TurmaNaoExistenteException.
@@ -300,10 +291,9 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Dada a descri��o da disciplina, remove a turma.
+	 * Dada a descricao da disciplina, remove a turma.
 	 * 
 	 * @param disciplina
-	 *            .
 	 * @throws RepositorioException
 	 *             , TurmaNaoExistenteException.
 	 */
@@ -347,7 +337,6 @@ public class Fachada implements IFachada {
 	 * Lista todas as turmas pertencentes a um determinado departamento.
 	 * 
 	 * @param departamento
-	 *            .
 	 * @return Lista de turmas.
 	 * @throws RepositorioException
 	 *             , TurmasNaoCadastradasException,
@@ -360,10 +349,9 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Lista todos os alunos que est�o em uma determinada turma.
+	 * Lista todos os alunos que estao em uma determinada turma.
 	 * 
 	 * @param turma
-	 *            .
 	 * @return Lista de alunos.
 	 * @throws TurmaSemAlunoException
 	 */
@@ -373,7 +361,7 @@ public class Fachada implements IFachada {
 	}
 
 	/**
-	 * Retorna a quantidade de turmas existentes no reposit�rio.
+	 * Retorna a quantidade de turmas existentes no repositorio.
 	 * 
 	 * @return quantidade.
 	 */
@@ -386,7 +374,7 @@ public class Fachada implements IFachada {
 	 * 
 	 * @param disciplina
 	 *            .
-	 * @return true se existe; false, se n�o existe.
+	 * @return true se existe; false, se nao existe.
 	 */
 	public boolean verificaExistenciaTurma(String disciplina) {
 		return this.meuControleTurmas.verificaSeTurmaExiste(disciplina);
@@ -395,7 +383,6 @@ public class Fachada implements IFachada {
 	@Override
 	public void removerAluno(Aluno aluno) throws AlunoNaoExistenteException {
 		// TODO Auto-generated method stub
-
 	}
 
 }

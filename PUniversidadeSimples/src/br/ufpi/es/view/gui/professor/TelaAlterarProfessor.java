@@ -106,8 +106,7 @@ public class TelaAlterarProfessor extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String cpf = txtCpfBusca.getText();
-				if (cpf.trim().length() != 0) { // verifica se o usuário
-													// preencheu a matrícula
+				if (cpf.trim().length() != 0) { // verifica se o usuário preencheu a matrícula
 					try {
 						Professor professor = fachada.buscarProfessor(cpf);
 						txtCpf.setText(professor.getCpf());
@@ -164,21 +163,21 @@ public class TelaAlterarProfessor extends JDialog {
 		botaoAlterar = new JButton("Alterar");
 		botaoAlterar.setFont(new Font("sans-serif", Font.BOLD, 13));
 
-		// Adiciona listener do botão "Inserir"
+		// Adiciona listener do botão "Alterar"
 		botaoAlterar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isDadosValidos()) {
-					Aluno aluno = new Aluno(txtLotacao.getText(), txtNome
-							.getText(), txtTitulo.getText());
 					try {
-						fachada.alterarAluno(aluno);
-
+						fachada.alterarProfessor(2, txtCpf.getText(), txtNome.getText());
 						JOptionPane.showMessageDialog(null,
 								"Professor alterado com sucesso.",
 								"Professor Alterado",
 								JOptionPane.INFORMATION_MESSAGE);
-
+						txtCpf.setText("");
+						txtNome.setText("");
+						txtLotacao.setText("");
+						txtTitulo.setText("");
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null,
 								"Não foi possível alterar o professor.", "Erro",
@@ -197,22 +196,27 @@ public class TelaAlterarProfessor extends JDialog {
 				boolean dadosValidos = true;
 				String erro = "Os seguintes campos apresentam erros:\n";
 
+				if (txtCpf.getText().trim().length() == 0){
+					erro += "CPF.\n";
+					dadosValidos = false;					
+				}
 				if (txtNome.getText().trim().length() == 0) {
 					erro += "- Nome.\n";
 					dadosValidos = false;
 				}
 				if (txtLotacao.getText().trim().length() == 0) {
-					erro += "- Matrícula.\n";
+					erro += "- Lotacao.\n";
 					dadosValidos = false;
 				}
 				if (txtTitulo.getText().trim().length() == 0) {
-					erro += "- Curso.\n";
+					erro += "- Titulo.\n";
 					dadosValidos = false;
 				}
 
-				JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
+				if (!dadosValidos){
+					JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
 						JOptionPane.ERROR_MESSAGE);
-
+				}
 				return dadosValidos;
 			}
 		});

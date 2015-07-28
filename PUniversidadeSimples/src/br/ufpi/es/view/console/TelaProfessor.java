@@ -15,19 +15,21 @@ import br.ufpi.es.model.Professor;
  */
 public class TelaProfessor {
 
+	public void menuProfessor(){
+		System.out.println("======================== Menu - Professor ======================");
+		System.out.println("1 - Inserir");
+		System.out.println("2 - Listar");
+		System.out.println("3 - Buscar");
+		System.out.println("4 - Remover");
+		System.out.println("5 - Alterar");
+		System.out.println("6 - Quantidade de Professores");
+		System.out.println("7 - Voltar para o menu principal");
+		System.out.println("=============================================================");
+	}
+	
 	public void mostrarTela(int opcao, Scanner s, Fachada fachada) {
 		while (true) {
-			System.out
-					.println("======================== Menu - Professor ======================");
-			System.out.println("1 - Inserir");
-			System.out.println("2 - Listar");
-			System.out.println("3 - Buscar");
-			System.out.println("4 - Remover");
-			System.out.println("5 - Alterar");
-			System.out.println("6 - Quantidade de Professores");
-			System.out.println("7 - Voltar para o menu principal");
-			System.out
-					.println("=============================================================");
+			menuProfessor();
 			opcao = s.nextInt();
 			if (opcao == 7) {
 				break;
@@ -53,16 +55,13 @@ public class TelaProfessor {
 				break;
 			case 2:
 				try {
-					List<Professor> listaProfessores = fachada
-							.listarProfessores();
+					List<Professor> listaProfessores = fachada.listarProfessores();
 					for (Professor p2 : listaProfessores) {
-						System.out
-								.println("-----------------------------------");
+						System.out.println("-----------------------------------");
 						System.out.println("CPF:" + p2.getCpf() + "\nNome:"
 								+ p2.getNome() + "\nLotacao:" + p2.getLotacao()
 								+ "\nTitulo:" + p2.getTitulo());
-						System.out
-								.println("-----------------------------------");
+						System.out.println("-----------------------------------");
 					}
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -93,6 +92,16 @@ public class TelaProfessor {
 				}
 				break;
 			case 5:
+				try{
+					System.out.println("Informe o CPF do Professor: ");
+					String cpf4 = s.next();
+					System.out.println("Informe o Nome do Professor: ");
+					String info = s.next();
+					fachada.alterarProfessor(2, cpf4, info);
+					System.out.println("Nome do professor alterado com sucesso.");
+				}catch (Exception e){
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 6:
 				try {
@@ -103,7 +112,7 @@ public class TelaProfessor {
 				}
 				break;
 			default:
-				System.out.println("Op��o inv�lida! Tente novamente!");
+				System.out.println("Opcao invalida! Tente novamente!");
 				break;
 			}
 		}

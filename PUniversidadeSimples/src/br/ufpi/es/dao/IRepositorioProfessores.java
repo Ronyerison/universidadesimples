@@ -3,6 +3,7 @@ package br.ufpi.es.dao;
 import java.util.List;
 
 import br.ufpi.es.model.Professor;
+import br.ufpi.es.system.exception.BuscaListaException;
 import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
 import br.ufpi.es.system.exception.ProfessoresNaoCadastradosException;
 
@@ -24,14 +25,14 @@ public interface IRepositorioProfessores {
 	 * @return professor.
 	 */
 	public Professor buscarProfessor(String cpf)
-			throws ProfessorNaoExistenteException;
+			throws ProfessorNaoExistenteException, BuscaListaException;
 
 	/**
 	 * Checa se existe professor dado o cpf.
 	 * 
 	 * @param cpf
 	 *            .
-	 * @return true se existe, false se n�o existe.
+	 * @return true se existe, false se nao existe.
 	 */
 	public boolean verificaExistenciaProfessor(String cpf);
 
@@ -44,7 +45,7 @@ public interface IRepositorioProfessores {
 	 *            , cp, info.
 	 */
 	public void alterarProfessor(int op, String cpf, String info)
-			throws ProfessorNaoExistenteException;
+			throws ProfessorNaoExistenteException, BuscaListaException;
 
 	/**
 	 * Dada o cpf remove o professor.
@@ -53,7 +54,7 @@ public interface IRepositorioProfessores {
 	 *            .
 	 */
 	public void removerProfessor(String cpf)
-			throws ProfessorNaoExistenteException;
+			throws ProfessorNaoExistenteException, BuscaListaException;
 
 	/**
 	 * Lista todos os professores do repositorio de professores.

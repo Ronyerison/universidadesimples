@@ -7,6 +7,7 @@ import br.ufpi.es.dao.IRepositorioProfessores;
 import br.ufpi.es.dao.RepositorioListaProfessores;
 import br.ufpi.es.model.Professor;
 import br.ufpi.es.model.Turma;
+import br.ufpi.es.system.exception.BuscaListaException;
 import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
 import br.ufpi.es.system.exception.ProfessorSemTurmaException;
 import br.ufpi.es.system.exception.ProfessoresNaoCadastradosException;
@@ -44,8 +45,9 @@ public class ProfessoresController {
 	 * @return professor.
 	 * @throws RepositorioException
 	 * @throws ProfessorNaoExistenteException
+	 * @throws BuscaListaException 
 	 */
-	public Professor buscar(String cpf) throws ProfessorNaoExistenteException {
+	public Professor buscar(String cpf) throws ProfessorNaoExistenteException, BuscaListaException {
 		return this.controleProfessores.buscarProfessor(cpf);
 	}
 
@@ -65,15 +67,13 @@ public class ProfessoresController {
 	 * atributo a ser alterado, o cpf do professor e a nova informacao devem ser
 	 * informados. As opcoes sao: 1 - CPF 2 - Nome 3 - Titulo 4 - Lotcacao
 	 * 
-	 * @param op
-	 *            , cp, info.
-	 * @param op
-	 *            , cpf e info.
+	 * @param op, cpf e info.
 	 * @throws RepositorioException
 	 * @throws ProfessorNaoExistenteException
+	 * @throws BuscaListaException 
 	 */
 	public void alterar(int op, String cpf, String info)
-			throws ProfessorNaoExistenteException {
+			throws ProfessorNaoExistenteException, BuscaListaException {
 		this.controleProfessores.alterarProfessor(op, cpf, info);
 	}
 
@@ -81,11 +81,11 @@ public class ProfessoresController {
 	 * Dado o cpf do professor, faz a remocao.
 	 * 
 	 * @param cpf
-	 *            .
 	 * @throws RepositorioException
 	 * @throws ProfessorNaoExistenteException
+	 * @throws BuscaListaException 
 	 */
-	public void remover(String cpf) throws ProfessorNaoExistenteException {
+	public void remover(String cpf) throws ProfessorNaoExistenteException, BuscaListaException {
 		this.controleProfessores.removerProfessor(cpf);
 	}
 
@@ -130,7 +130,7 @@ public class ProfessoresController {
 	 */
 	public void associaProfessorTurma(Professor professor, Turma turma) {
 		professor.getTurma().add(turma); // Adiciona uma turma ao professor.
-		turma.setProfessor(professor); // relaciona o professo � turma.
+		turma.setProfessor(professor); // relaciona o professo a turma.
 	}
 
 	/**
