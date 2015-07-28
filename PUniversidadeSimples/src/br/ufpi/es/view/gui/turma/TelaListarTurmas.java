@@ -19,6 +19,11 @@ import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.aluno.AlunosNaoCadastradosException;
 import br.ufpi.es.system.exception.turma.TurmasNaoCadastradasException;
 
+/**
+ * Classe que cria a Tela de Listagem de Turmas
+ * @author armandosoaressousa
+ *
+ */
 public class TelaListarTurmas extends JDialog {
 	
 private static final long serialVersionUID = 1L;
@@ -32,6 +37,10 @@ private static final long serialVersionUID = 1L;
 	private JPanel painelCentral;
 	private JTextArea txtTurmas;
 	
+	/**
+	 * Monta a Tela de Listagem de Turmas
+	 * @param f fachada do sistema
+	 */
 	public TelaListarTurmas(Fachada f) {
 		// Configurações do dialog
 		setTitle("Listar Turmas");
@@ -63,9 +72,9 @@ private static final long serialVersionUID = 1L;
 		painelCentral.add(new JScrollPane(txtTurmas));
 		
 		try {
-			List<Turma> listaTurmas = fachada.listarTurmas(); // obtém a lista de alunos
+			List<Turma> listaTurmas = fachada.listarTurmas(); // obtém a lista de turmas
 			for (Turma turma : listaTurmas) {
-				// Adiciona o aluno ao textArea
+				// Adiciona a turma ao textArea
 				txtTurmas.append(String.format("%-20s%-20s%-20s\n",
 						"Departamento: " + turma.getDepartamento(), 
 						"Disciplina: " + turma.getDisciplina(), 

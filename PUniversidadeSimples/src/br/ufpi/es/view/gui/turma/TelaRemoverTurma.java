@@ -18,6 +18,11 @@ import javax.swing.JTextField;
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
 
+/**
+ * Classe que monta a Tela remover turma
+ * @author armandosoaressousa
+ *
+ */
 public class TelaRemoverTurma extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -40,6 +45,10 @@ public class TelaRemoverTurma extends JDialog {
 	private JTextField txtDisciplinaRemover;
 	private JButton buttonRemover;
 		
+	/**
+	 * Monta a Tela remover turma
+	 * @param f fachada do sistema
+	 */
 	public TelaRemoverTurma(Fachada f) {
 		// Configurações do dialog
 		setTitle("Remover Turma");
@@ -65,7 +74,7 @@ public class TelaRemoverTurma extends JDialog {
 		painelForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
 		painelEsquerda = new JPanel(new GridLayout(1, 1, 10, 10));
-		labelDisciplinaRemover = new JLabel("Informe o nome da disciplina:");
+		labelDisciplinaRemover = new JLabel("Informe o identificador:");
 		labelDisciplinaRemover.setFont(new Font("sans-serif", Font.BOLD, 12));
 		painelEsquerda.add(labelDisciplinaRemover);
 		
@@ -83,6 +92,11 @@ public class TelaRemoverTurma extends JDialog {
 				if (idTurma.trim().length() != 0) {
 					try {
 						fachada.removerTurma(Integer.valueOf(idTurma));
+						JOptionPane.showMessageDialog(
+								null,"Turma removida",
+								"Turma removida com sucesso.",
+								JOptionPane.INFORMATION_MESSAGE);
+						txtDisciplinaRemover.setText("");
 					} catch (TurmaNaoExistenteException e1) {
 						JOptionPane.showMessageDialog(
 								null,
@@ -99,7 +113,7 @@ public class TelaRemoverTurma extends JDialog {
 				} else {
 					JOptionPane.showMessageDialog(
 							null,
-							"Você deve informar o nome da disciplina.",
+							"Você deve informar o identificador da turma.",
 							"Campo obrigatório",
 							JOptionPane.ERROR_MESSAGE);
 				}

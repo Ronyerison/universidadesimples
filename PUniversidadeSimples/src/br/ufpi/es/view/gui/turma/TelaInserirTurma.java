@@ -19,6 +19,11 @@ import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
 
+/**
+ * Classe que monta a Tela Inserir Turma
+ * @author armandosoaressousa
+ *
+ */
 public class TelaInserirTurma extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -48,6 +53,10 @@ public class TelaInserirTurma extends JDialog {
 	private JButton botaoLimpar;
 	private JButton botaoInserir;
 
+	/**
+	 * Monta a Tela Inserir Turma
+	 * @param f fachada do sistema
+	 */
 	public TelaInserirTurma(Fachada f) {
 		// Configurações do dialog
 		setTitle("Inserir Turma");

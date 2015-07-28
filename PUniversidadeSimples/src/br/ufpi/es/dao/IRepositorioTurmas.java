@@ -95,4 +95,12 @@ public interface IRepositorioTurmas {
 	 * @return lista de alunos
 	 */
 	public List<Aluno> listaAlunos(Turma turma);
+	
+	/**
+	 * Dada uma nova turma atualiza os dados da turma encontrada
+	 * @param identificador da turma original
+	 * @param novaTurma
+	 * @throws TurmaNaoExistenteException
+	 */
+	public void alterarTurma(int identificador, Turma novaTurma) throws TurmaNaoExistenteException;
 }

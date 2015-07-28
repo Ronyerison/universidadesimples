@@ -22,6 +22,11 @@ import br.ufpi.es.view.gui.aluno.TelaListarAlunos;
 import br.ufpi.es.view.gui.aluno.TelaQtdAlunos;
 import br.ufpi.es.view.gui.aluno.TelaRemoverAluno;
 
+/**
+ * Classe que monta a Tela de opcoes da Turma
+ * @author armandosoaressousa
+ *
+ */
 public class TelaMenuTurma extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +44,10 @@ public class TelaMenuTurma extends JDialog {
 
 	private Fachada fachada;
 
+	/**
+	 * Monta a Tela de opcoes da Turma
+	 * @param f
+	 */
 	public TelaMenuTurma(Fachada f) {
 		// configurações do dialog
 		setTitle("Menu Turma");
@@ -108,7 +117,7 @@ public class TelaMenuTurma extends JDialog {
 		botaoAlterar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new TelaAlterarAluno(fachada); // Exibe a tela Alterar Aluno
+				new TelaAlterarTurma(fachada); // Exibe a tela Alterar Aluno
 			}
 		});
 

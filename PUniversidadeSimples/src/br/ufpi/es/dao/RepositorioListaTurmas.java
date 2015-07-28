@@ -156,6 +156,22 @@ public class RepositorioListaTurmas implements IRepositorioTurmas {
 	}
 
 	/**
+	 * Dada uma nova turma atualiza os dados da turma encontrada
+	 * @param identificador da turma original
+	 * @param novaTurma
+	 * @throws TurmaNaoExistenteException
+	 */
+	public void alterarTurma(int identificador, Turma novaTurma)
+			throws TurmaNaoExistenteException {
+		Turma a = this.buscarTurma(identificador);
+
+		a.setDepartamento(novaTurma.getDepartamento());
+		a.setDisciplina(novaTurma.getDisciplina());
+		a.setCargaHoraria(novaTurma.getCargaHoraria());
+		a.setProfessor(novaTurma.getProfessor());
+		//TO DO revisar o metodo de alteracao da turma
+	}	
+	/**
 	 * Dada a disciplina, remove a turma correspondente.
 	 * 
 	 * @param discplina

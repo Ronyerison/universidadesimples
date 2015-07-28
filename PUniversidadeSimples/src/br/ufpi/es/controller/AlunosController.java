@@ -1,6 +1,5 @@
 package br.ufpi.es.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import br.ufpi.es.dao.IRepositorioAlunos;

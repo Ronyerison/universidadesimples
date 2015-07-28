@@ -77,6 +77,16 @@ public class TurmasController {
 			throws TurmaNaoExistenteException {
 		this.controleTurmas.alterarTurma(op, identificador, info);
 	}
+	
+	/**
+	 * Dada uma turma original com os novos valores faz a alteracao com os novos dados
+	 * @param identificador
+	 * @param novaTurma
+	 * @throws TurmaNaoExistenteException
+	 */
+	public void alterar(int identificador, Turma novaTurma) throws TurmaNaoExistenteException{
+		this.controleTurmas.alterarTurma(identificador, novaTurma);
+	}
 
 	/**
 	 * Dada a identificador, faz a remocao da turma.

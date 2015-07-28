@@ -1,12 +1,10 @@
 package br.ufpi.es.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import br.ufpi.es.dao.IRepositorioAlunos;
 import br.ufpi.es.dao.IRepositorioProfessores;
 import br.ufpi.es.dao.IRepositorioTurmas;
-import br.ufpi.es.dao.RepositorioBancoAlunos;
 import br.ufpi.es.dao.RepositorioListaAlunos;
 import br.ufpi.es.dao.RepositorioListaProfessores;
 import br.ufpi.es.dao.RepositorioListaTurmas;
@@ -288,6 +286,16 @@ public class Fachada implements IFachada {
 	public void alterarTurma(int op, int identificador, String info)
 			throws TurmaNaoExistenteException {
 		this.meuControleTurmas.alterar(op, identificador, info);
+	}
+	
+	/**
+	 * Dada uma turma original, faz as alteracoes com os novos dados
+	 * @param identificador
+	 * @param novaTurma
+	 * @throws TurmaNaoExistenteException
+	 */
+	public void alterarTurma(int identificador, Turma novaTurma) throws TurmaNaoExistenteException{
+		this.meuControleTurmas.alterar(identificador, novaTurma);
 	}
 
 	/**

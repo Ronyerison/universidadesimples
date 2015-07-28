@@ -19,6 +19,11 @@ import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
 
+/**
+ * Classe que monta a Tela de Busca de Turma
+ * @author armandosoaressousa
+ *
+ */
 public class TelaBuscarTurma extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -45,6 +50,10 @@ public class TelaBuscarTurma extends JDialog {
 	private JTextField txtDepartamento;
 	private JTextField txtCargaHoraria;
 	
+	/**
+	 * Monta a Tela de Busca pelo identificador da Turma
+	 * @param f fachada do sistema
+	 */
 	public TelaBuscarTurma(Fachada f) {
 		// Configurações do dialog
 		setTitle("Buscar Turma");
@@ -70,7 +79,7 @@ public class TelaBuscarTurma extends JDialog {
 		painelForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
 		painelEsquerda = new JPanel(new GridLayout(4, 1, 10, 10));
-		labelDisciplinaBusca = new JLabel("Informe a disciplina:");
+		labelDisciplinaBusca = new JLabel("Informe o identificador");
 		labelDisciplinaBusca.setFont(new Font("sans-serif", Font.BOLD, 12));
 		labelDepartamento = new JLabel("Departamento:");
 		labelDepartamento.setFont(new Font("sans-serif", Font.BOLD, 12));

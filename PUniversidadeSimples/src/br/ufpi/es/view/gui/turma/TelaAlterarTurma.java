@@ -20,6 +20,11 @@ import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
 
+/**
+ * Classe que monta a Tela para Alterar turma
+ * @author armandosoaressousa
+ *
+ */
 public class TelaAlterarTurma extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
@@ -53,6 +58,10 @@ public class TelaAlterarTurma extends JDialog {
 	private JButton botaoLimpar;
 	private JButton botaoAlterar;
 
+	/**
+	 * Monta a Tela de alterar turma
+	 * @param f fachada do sistema
+	 */
 	public TelaAlterarTurma(Fachada f) {
 		// Configurações do dialog
 		setTitle("Alterar Turma");
@@ -78,7 +87,7 @@ public class TelaAlterarTurma extends JDialog {
 		painelForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		painelEsquerda = new JPanel(new GridLayout(4, 1, 10, 10));
-		labelDisciplinaBusca = new JLabel("Informe o nome da disciplina:");
+		labelDisciplinaBusca = new JLabel("Informe o identificador:");
 		labelDisciplinaBusca.setFont(new Font("sans-serif", Font.BOLD, 12));
 		labelDepartamento = new JLabel("Departamento:");
 		labelDepartamento.setFont(new Font("sans-serif", Font.BOLD, 12));
@@ -118,7 +127,7 @@ public class TelaAlterarTurma extends JDialog {
 					}
 				} else {
 					JOptionPane.showMessageDialog(null,
-							"Você deve informar o nome da disciplina.",
+							"Você deve informar o identificador da turma.",
 							"Campo obrigatório", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -155,27 +164,46 @@ public class TelaAlterarTurma extends JDialog {
 		botaoAlterar = new JButton("Alterar");
 		botaoAlterar.setFont(new Font("sans-serif", Font.BOLD, 13));
 
-		// Adiciona listener do botão "Inserir"
+		// Adiciona listener do botão "Alterar"
 		botaoAlterar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Turma turma = new Turma("","",0);
 				if (isDadosValidos()) {
-					Aluno aluno = new Aluno(txtDisciplina.getText(), txtDepartamento
-							.getText(), txtCargaHoraria.getText());
-					try {
-						fachada.alterarAluno(aluno);
-
+					String idTurma = txtDisciplinaBusca.getText();
+					if (idTurma.compareTo("") != 0) { // verifica id da turma
+						try {
+							turma = fachada.buscarTurma(Integer.valueOf(idTurma));
+						} catch (TurmaNaoExistenteException e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage()
+									+ ".", "Turma Não Existente",
+									JOptionPane.INFORMATION_MESSAGE);
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage(),
+									"Erro", JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
 						JOptionPane.showMessageDialog(null,
-								"Aluno alterado com sucesso.",
-								"Aluno Alterado",
-								JOptionPane.INFORMATION_MESSAGE);
-
-					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null,
-								"Não foi possível alterar o aluno.", "Erro",
-								JOptionPane.ERROR_MESSAGE);
+								"Você deve informar o identificador da turma.",
+								"Campo obrigatório", JOptionPane.ERROR_MESSAGE);
 					}
 				}
+
+				Turma tAux = new Turma(txtDepartamento.getText(),txtDisciplina.getText(), Integer.valueOf(txtCargaHoraria.getText()));
+
+				try {
+					fachada.alterarTurma(turma.getIdTurma(), tAux);
+					JOptionPane.showMessageDialog(null,
+							"Turma alterada com sucesso.",
+							"Turma Alterada",
+							JOptionPane.INFORMATION_MESSAGE);
+
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,
+							"Não foi possível alterar a turma.", "Erro",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 
 			/**
@@ -201,8 +229,10 @@ public class TelaAlterarTurma extends JDialog {
 					dadosValidos = false;
 				}
 
+				if (!dadosValidos){
 				JOptionPane.showMessageDialog(null, erro, "Dados Inválidos",
 						JOptionPane.ERROR_MESSAGE);
+				}
 
 				return dadosValidos;
 			}
