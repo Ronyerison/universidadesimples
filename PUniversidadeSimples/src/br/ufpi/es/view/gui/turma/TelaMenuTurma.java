@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import br.ufpi.es.controller.Fachada;
@@ -41,6 +42,8 @@ public class TelaMenuTurma extends JDialog {
 	private JButton botaoRemover;
 	private JButton botaoAlterar;
 	private JButton botaoQtdAlunos;
+	private JButton botaoMatricular;
+	private JButton botaoListarAlunos;
 
 	private Fachada fachada;
 
@@ -68,7 +71,7 @@ public class TelaMenuTurma extends JDialog {
 		labelMenu.setForeground(Color.BLUE);
 		painelSuperior.add(labelMenu);
 
-		painelMenu = new JPanel(new GridLayout(3, 2, 10, 10));
+		painelMenu = new JPanel(new GridLayout(4, 2, 10, 10));
 		painelMenu.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		botaoInserir = new JButton("Inserir");
@@ -129,14 +132,36 @@ public class TelaMenuTurma extends JDialog {
 				new TelaQtdTurma(fachada);
 			}
 		});
-
+		
+		botaoMatricular = new JButton("Matricular Aluno");
+		botaoMatricular.setFont(new Font("sans-serif", Font.BOLD, 12));
+		// Adiciona listener ao botao "Matricular Aluno"
+		botaoMatricular.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new TelaMatricularAluno(fachada);
+			}
+		});
+		
+		botaoListarAlunos = new JButton("Listar Alunos de uma Turma");
+		botaoListarAlunos.setFont(new Font("sans-serif", Font.BOLD, 12));
+		// Adiciona listener ao botao "Listar alunos de uma turma"
+		botaoListarAlunos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new TelaListarAlunosTurma(fachada);
+			}
+		});
+		
 		painelMenu.add(botaoInserir);
 		painelMenu.add(botaoListar);
 		painelMenu.add(botaoBuscar);
 		painelMenu.add(botaoRemover);
 		painelMenu.add(botaoAlterar);
 		painelMenu.add(botaoQtdAlunos);
-
+		painelMenu.add(botaoMatricular);
+		painelMenu.add(botaoListarAlunos);
+		
 		add(painelSuperior, BorderLayout.NORTH);
 		add(painelMenu, BorderLayout.CENTER);
 
