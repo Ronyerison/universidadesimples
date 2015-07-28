@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Professor;
-import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
+import br.ufpi.es.system.exception.professor.ProfessorNaoExistenteException;
 
 public class TelaAlterarProfessor extends JDialog {
 

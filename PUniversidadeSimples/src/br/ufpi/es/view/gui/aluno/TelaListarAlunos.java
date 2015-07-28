@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
-import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
+import br.ufpi.es.system.exception.aluno.AlunosNaoCadastradosException;
 
 public class TelaListarAlunos extends JDialog {
 

@@ -1,4 +1,4 @@
-package br.ufpi.es.system.exception;
+package br.ufpi.es.system.exception.aluno;
 
 public class RemoverAlunoException extends Exception{
 

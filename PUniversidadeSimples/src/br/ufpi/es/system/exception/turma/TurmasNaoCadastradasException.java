@@ -1,4 +1,4 @@
-package br.ufpi.es.system.exception;
+package br.ufpi.es.system.exception.turma;
 
 @SuppressWarnings("serial")
 public class TurmasNaoCadastradasException extends Exception{

@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import br.ufpi.es.controller.Fachada;
-import br.ufpi.es.system.exception.TurmaNaoExistenteException;
+import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
 
 public class TelaRemoverTurma extends JDialog {
 

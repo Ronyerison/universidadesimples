@@ -1,9 +1,9 @@
-package br.ufpi.es.system.exception;
+package br.ufpi.es.system.exception.professor;
 
 @SuppressWarnings("serial")
 public class ProfessorSemTurmaException extends Exception{
 	
 	public ProfessorSemTurmaException(){
-		super("Esse professor não leciona em nehuma turma!");
+		super("Esse professor nï¿½o leciona em nehuma turma!");
 	}
 }

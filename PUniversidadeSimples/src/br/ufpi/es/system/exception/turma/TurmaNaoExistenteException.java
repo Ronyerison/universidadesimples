@@ -1,4 +1,4 @@
-package br.ufpi.es.system.exception;
+package br.ufpi.es.system.exception.turma;
 
 @SuppressWarnings("serial")
 public class TurmaNaoExistenteException extends Exception{

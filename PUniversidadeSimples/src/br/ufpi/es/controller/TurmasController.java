@@ -7,11 +7,11 @@ import br.ufpi.es.dao.IRepositorioTurmas;
 import br.ufpi.es.dao.RepositorioListaTurmas;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
-import br.ufpi.es.system.exception.AlunoNaoExistenteException;
-import br.ufpi.es.system.exception.DepartamentoNaoExisteException;
-import br.ufpi.es.system.exception.TurmaNaoExistenteException;
-import br.ufpi.es.system.exception.TurmaSemAlunoException;
-import br.ufpi.es.system.exception.TurmasNaoCadastradasException;
+import br.ufpi.es.system.exception.aluno.AlunoNaoExistenteException;
+import br.ufpi.es.system.exception.turma.DepartamentoNaoExisteException;
+import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
+import br.ufpi.es.system.exception.turma.TurmaSemAlunoException;
+import br.ufpi.es.system.exception.turma.TurmasNaoCadastradasException;
 
 public class TurmasController {
 	private IRepositorioTurmas controleTurmas;

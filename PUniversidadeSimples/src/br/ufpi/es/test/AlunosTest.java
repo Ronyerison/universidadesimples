@@ -14,7 +14,7 @@ import org.junit.Test;
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.controller.IFachada;
 import br.ufpi.es.model.Aluno;
-import br.ufpi.es.system.exception.AlunoNaoExistenteException;
+import br.ufpi.es.system.exception.aluno.AlunoNaoExistenteException;
 
 public class AlunosTest {
 	IFachada fachada;

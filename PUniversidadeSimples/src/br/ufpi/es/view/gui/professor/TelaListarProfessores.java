@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Professor;
-import br.ufpi.es.system.exception.ProfessoresNaoCadastradosException;
+import br.ufpi.es.system.exception.professor.ProfessoresNaoCadastradosException;
 
 public class TelaListarProfessores extends JDialog {
 

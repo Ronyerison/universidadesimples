@@ -1,4 +1,4 @@
-package br.ufpi.es.system.exception;
+package br.ufpi.es.system.exception.professor;
 
 @SuppressWarnings("serial")
 public class ProfessoresNaoCadastradosException extends Exception{

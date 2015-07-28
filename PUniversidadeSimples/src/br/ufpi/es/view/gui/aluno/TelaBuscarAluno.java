@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
-import br.ufpi.es.system.exception.AlunoNaoExistenteException;
+import br.ufpi.es.system.exception.aluno.AlunoNaoExistenteException;
 
 /**
  * Classe que monta a Tela Buscar Aluno GUI

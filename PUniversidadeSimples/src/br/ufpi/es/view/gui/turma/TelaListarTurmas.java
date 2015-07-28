@@ -16,8 +16,8 @@ import javax.swing.JTextArea;
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
-import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
-import br.ufpi.es.system.exception.TurmasNaoCadastradasException;
+import br.ufpi.es.system.exception.aluno.AlunosNaoCadastradosException;
+import br.ufpi.es.system.exception.turma.TurmasNaoCadastradasException;
 
 public class TelaListarTurmas extends JDialog {
 	

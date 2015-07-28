@@ -5,8 +5,8 @@ import java.util.List;
 
 import br.ufpi.es.model.Professor;
 import br.ufpi.es.system.exception.BuscaListaException;
-import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
-import br.ufpi.es.system.exception.ProfessoresNaoCadastradosException;
+import br.ufpi.es.system.exception.professor.ProfessorNaoExistenteException;
+import br.ufpi.es.system.exception.professor.ProfessoresNaoCadastradosException;
 
 public class RepositorioListaProfessores implements IRepositorioProfessores {
 	private List<Professor> professores;

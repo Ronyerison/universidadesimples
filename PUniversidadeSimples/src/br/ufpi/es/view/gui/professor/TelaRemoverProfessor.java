@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import br.ufpi.es.controller.Fachada;
-import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
+import br.ufpi.es.system.exception.professor.ProfessorNaoExistenteException;
 
 public class TelaRemoverProfessor extends JDialog {
 

@@ -8,9 +8,9 @@ import br.ufpi.es.dao.RepositorioListaProfessores;
 import br.ufpi.es.model.Professor;
 import br.ufpi.es.model.Turma;
 import br.ufpi.es.system.exception.BuscaListaException;
-import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
-import br.ufpi.es.system.exception.ProfessorSemTurmaException;
-import br.ufpi.es.system.exception.ProfessoresNaoCadastradosException;
+import br.ufpi.es.system.exception.professor.ProfessorNaoExistenteException;
+import br.ufpi.es.system.exception.professor.ProfessorSemTurmaException;
+import br.ufpi.es.system.exception.professor.ProfessoresNaoCadastradosException;
 
 public class ProfessoresController {
 	private IRepositorioProfessores controleProfessores;

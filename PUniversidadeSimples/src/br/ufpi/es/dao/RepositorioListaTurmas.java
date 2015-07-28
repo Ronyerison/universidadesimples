@@ -5,9 +5,9 @@ import java.util.List;
 
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
-import br.ufpi.es.system.exception.AlunoNaoExistenteException;
-import br.ufpi.es.system.exception.TurmaNaoExistenteException;
-import br.ufpi.es.system.exception.TurmasNaoCadastradasException;
+import br.ufpi.es.system.exception.aluno.AlunoNaoExistenteException;
+import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
+import br.ufpi.es.system.exception.turma.TurmasNaoCadastradasException;
 
 /**
  * Classe Repositorio de Turmas em Lista

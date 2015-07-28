@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import br.ufpi.es.controller.Fachada;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
-import br.ufpi.es.system.exception.TurmaNaoExistenteException;
+import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
 
 public class TelaAlterarTurma extends JDialog {
 	

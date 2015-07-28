@@ -6,10 +6,10 @@ import java.util.List;
 import br.ufpi.es.dao.IRepositorioAlunos;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Turma;
-import br.ufpi.es.system.exception.AlunoNaoExistenteException;
-import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
 import br.ufpi.es.system.exception.InserirListaException;
-import br.ufpi.es.system.exception.VerificarExistenciaAlunoListaException;
+import br.ufpi.es.system.exception.aluno.AlunoNaoExistenteException;
+import br.ufpi.es.system.exception.aluno.AlunosNaoCadastradosException;
+import br.ufpi.es.system.exception.aluno.VerificarExistenciaAlunoListaException;
 
 public class AlunosController {
 	private IRepositorioAlunos controleAlunos;

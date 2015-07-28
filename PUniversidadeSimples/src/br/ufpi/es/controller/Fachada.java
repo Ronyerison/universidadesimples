@@ -13,18 +13,18 @@ import br.ufpi.es.dao.RepositorioListaTurmas;
 import br.ufpi.es.model.Aluno;
 import br.ufpi.es.model.Professor;
 import br.ufpi.es.model.Turma;
-import br.ufpi.es.system.exception.AlunoNaoExistenteException;
-import br.ufpi.es.system.exception.AlunosNaoCadastradosException;
 import br.ufpi.es.system.exception.BuscaListaException;
-import br.ufpi.es.system.exception.DepartamentoNaoExisteException;
 import br.ufpi.es.system.exception.InserirListaException;
-import br.ufpi.es.system.exception.ProfessorNaoExistenteException;
-import br.ufpi.es.system.exception.ProfessorSemTurmaException;
-import br.ufpi.es.system.exception.ProfessoresNaoCadastradosException;
-import br.ufpi.es.system.exception.TurmaNaoExistenteException;
-import br.ufpi.es.system.exception.TurmaSemAlunoException;
-import br.ufpi.es.system.exception.TurmasNaoCadastradasException;
-import br.ufpi.es.system.exception.VerificarExistenciaAlunoListaException;
+import br.ufpi.es.system.exception.aluno.AlunoNaoExistenteException;
+import br.ufpi.es.system.exception.aluno.AlunosNaoCadastradosException;
+import br.ufpi.es.system.exception.aluno.VerificarExistenciaAlunoListaException;
+import br.ufpi.es.system.exception.professor.ProfessorNaoExistenteException;
+import br.ufpi.es.system.exception.professor.ProfessorSemTurmaException;
+import br.ufpi.es.system.exception.professor.ProfessoresNaoCadastradosException;
+import br.ufpi.es.system.exception.turma.DepartamentoNaoExisteException;
+import br.ufpi.es.system.exception.turma.TurmaNaoExistenteException;
+import br.ufpi.es.system.exception.turma.TurmaSemAlunoException;
+import br.ufpi.es.system.exception.turma.TurmasNaoCadastradasException;
 
 public class Fachada implements IFachada {
 	private AlunosController meuControleAlunos;

@@ -1,8 +1,8 @@
-package br.ufpi.es.system.exception;
+package br.ufpi.es.system.exception.turma;
 
 @SuppressWarnings("serial")
 public class TurmaSemAlunoException extends Exception{
 	public TurmaSemAlunoException() {
-		super("Essa turma não contém alunos.");
+		super("Essa turma nï¿½o contï¿½m alunos.");
 	}
 }
